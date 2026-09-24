@@ -1,0 +1,39 @@
+---
+const features = [
+  {
+    icon: "☕",
+    title: "Artisan Roasts",
+    desc: "Sourced with care and brewed to perfection. Our signature blends are guaranteed to delight your palate."
+  },
+  {
+    icon: "🥐",
+    title: "Fresh Pastries",
+    desc: "Baked daily on-site. From flaky croissants to rich chocolate cakes, there's a treat for everyone."
+  },
+  {
+    icon: "📚",
+    title: "Cozy Atmosphere",
+    desc: "Warm lighting, comfortable seating, and free Wi-Fi make it the perfect spot for remote work or study."
+  }
+];
+---
+<section id="about" class="py-20 bg-white">
+  <div class="container mx-auto px-4 md:px-6">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-serif font-bold text-brand-900 mb-4">More Than Just Coffee</h2>
+      <p class="text-lg text-brand-900/70">We've crafted an experience that feels like a warm hug. Take a break from the bustling streets of Basrah and relax in your new favorite spot.</p>
+    </div>
+    
+    <div class="grid md:grid-cols-3 gap-10">
+      {features.map(feature => (
+        <div class="bg-brand-50 p-8 rounded-2xl text-center hover:shadow-lg transition-shadow border border-brand-100 group">
+          <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 text-3xl shadow-sm group-hover:scale-110 transition-transform">
+            {feature.icon}
+          </div>
+          <h3 class="text-xl font-bold mb-3 text-brand-900">{feature.title}</h3>
+          <p class="text-brand-900/70 leading-relaxed">{feature.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
