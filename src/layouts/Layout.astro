@@ -1,28 +1,300 @@
 ---
-import '../styles/global.css';
+import { SITE } from '../data/site.js';
 
-interface Props {
-	title: string;
-	description: string;
-}
+const {
+  title = `${SITE.name} — ${SITE.tagline} | Specialty Coffee & Kitchen in Basra`,
+  description = `NooK Café in Basra — specialty coffee, hot chocolate, signature iced drinks and wood-fired pizza. ${SITE.taglineAr} — ${SITE.tagline}. Rated ${SITE.rating} on Google.`
+} = Astro.props;
 
-const { title, description } = Astro.props;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CafeOrCoffeeShop',
+  name: SITE.name,
+  alternateName: SITE.nameAlt,
+  image: SITE.posts[0].image,
+  logo: SITE.profilePic,
+  description,
+  servesCuisine: ['Coffee', 'Desserts', 'Pizza', 'Brunch'],
+  telephone: SITE.phone,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'شارع سيد حامد، الفرع المجاور لمطعم الحسون',
+    addressLocality: 'Basrah',
+    addressRegion: 'Basra Governorate',
+    postalCode: '61001',
+    addressCountry: 'IQ'
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: SITE.rating,
+    reviewCount: SITE.reviewCount,
+    bestRating: 5
+  },
+  sameAs: [SITE.instagram],
+  url: Astro.site ? Astro.site.href : 'https://nook-cafe.example'
+};
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-		<meta name="description" content={description} />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-	</head>
-	<body class="bg-brand-50 text-brand-900 font-sans antialiased selection:bg-brand-500 selection:text-white flex flex-col min-h-screen">
-		<slot />
-	</body>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#2A1A12" />
+    <link rel="canonical" href="https://nook-cafe.example/" />
+
+    <!-- Instagram profile picture doubles as the logo + favicon -->
+    <link rel="icon" href={SITE.profilePic} />
+    <link rel="apple-touch-icon" href={SITE.profilePic} />
+    <link rel="mask-icon" href="/favicon.svg" color="#2A1A12" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={`${SITE.name} — ${SITE.tagline}`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={SITE.posts[0].image} />
+    <meta property="og:locale" content="en_IQ" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${SITE.name} — ${SITE.tagline}`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={SITE.posts[0].image} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+
+  <body class="bg-cream font-body text-anchor antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-anchor focus:px-5 focus:py-3 focus:text-sm focus:font-bold focus:uppercase focus:text-cream"
+      >Skip to content</a
+    >
+    <slot />
+
+    <script>
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ---------- Scroll reveal ---------- */
+      const reveals = document.querySelectorAll('[data-reveal]');
+      if (reduce) {
+        reveals.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
+        );
+        reveals.forEach((el) => io.observe(el));
+      }
+
+      /* ---------- Stat counters ---------- */
+      const counters = document.querySelectorAll('[data-count]');
+      const runCounter = (el) => {
+        const target = parseFloat(el.dataset.count);
+        const decimals = parseInt(el.dataset.decimals || '0', 10);
+        const suffix = el.dataset.suffix || '';
+        if (reduce) {
+          el.textContent = target.toFixed(decimals) + suffix;
+          return;
+        }
+        const duration = 1200;
+        const start = performance.now();
+        const tick = (now) => {
+          const p = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = (target * eased).toFixed(decimals) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+      if (counters.length) {
+        const cio = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                runCounter(e.target);
+                cio.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.5 }
+        );
+        counters.forEach((el) => cio.observe(el));
+      }
+    </script>
+
+    <style is:global>
+      :root {
+        --anchor: #2a1a12;
+        --cream: #fff7ea;
+        --butter: #ffe9a8;
+        --golden: #f5b301;
+        --pink: #ff9cc2;
+        --lavender: #b7a9f2;
+      }
+
+      html,
+      body {
+        overflow-x: hidden;
+      }
+
+      body {
+        background-color: var(--cream);
+      }
+
+      section[id] {
+        scroll-margin-top: 120px;
+      }
+
+      /* ---------- Focus ---------- */
+      :focus-visible {
+        outline: 3px solid var(--golden);
+        outline-offset: 3px;
+        border-radius: 8px;
+      }
+
+      /* ---------- Display type ---------- */
+      .display {
+        font-family: 'Anton', Impact, sans-serif;
+        text-transform: uppercase;
+        letter-spacing: -0.02em;
+        line-height: 0.92;
+      }
+      .h-hero {
+        font-size: clamp(3.25rem, 11vw, 8.5rem);
+      }
+      .h-section {
+        font-size: clamp(2.5rem, 6.2vw, 5.5rem);
+      }
+      .h-sub {
+        font-size: clamp(1.75rem, 3.4vw, 3rem);
+      }
+      .eyebrow {
+        font-family: 'Space Mono', monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.28em;
+        font-size: 0.7rem;
+        font-weight: 700;
+      }
+
+      /* ---------- Reveal ---------- */
+      [data-reveal] {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.65s cubic-bezier(0.2, 0.8, 0.3, 1),
+          transform 0.65s cubic-bezier(0.2, 0.8, 0.3, 1);
+        transition-delay: var(--d, 0ms);
+        will-change: opacity, transform;
+      }
+      [data-reveal].is-visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      .line-mask {
+        display: block;
+        overflow: hidden;
+      }
+      .line-mask > span {
+        display: block;
+        transform: translateY(112%);
+        transition: transform 0.85s cubic-bezier(0.16, 0.84, 0.28, 1);
+        transition-delay: var(--d, 0ms);
+      }
+      .is-visible .line-mask > span {
+        transform: translateY(0);
+      }
+
+      /* ---------- Marquees ---------- */
+      @keyframes marquee {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+      .marquee {
+        animation: marquee 34s linear infinite;
+      }
+      .marquee--rev {
+        animation-direction: reverse;
+      }
+      .ribbon:hover .marquee {
+        animation-duration: 90s;
+      }
+
+      /* ---------- Floating props ---------- */
+      @keyframes floaty {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0) rotate(var(--r, 0deg));
+        }
+        50% {
+          transform: translate3d(0, -16px, 0) rotate(var(--r, 0deg));
+        }
+      }
+      .prop {
+        animation: floaty 6s ease-in-out infinite;
+        animation-delay: var(--fd, 0s);
+      }
+
+      /* ---------- Checkerboard ---------- */
+      .checker {
+        background-color: var(--c2, var(--cream));
+        background-image:
+          linear-gradient(45deg, var(--c1, var(--anchor)) 25%, transparent 25% 75%, var(--c1, var(--anchor)) 75%),
+          linear-gradient(45deg, var(--c1, var(--anchor)) 25%, transparent 25% 75%, var(--c1, var(--anchor)) 75%);
+        background-size: var(--s, 32px) var(--s, 32px);
+        background-position: 0 0, calc(var(--s, 32px) / 2) calc(var(--s, 32px) / 2);
+      }
+
+      /* ---------- Paper grain ---------- */
+      .grain::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.045;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+
+      /* ---------- Blob ---------- */
+      .blob {
+        border-radius: 58% 42% 47% 53% / 46% 52% 48% 54%;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        [data-reveal] {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+        .line-mask > span {
+          transform: none !important;
+        }
+        .marquee,
+        .prop {
+          animation: none !important;
+        }
+        .checker {
+          background-image: none;
+        }
+      }
+    </style>
+  </body>
 </html>

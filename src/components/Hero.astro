@@ -1,56 +1,179 @@
 ---
-const rating = 4.2;
-const totalReviews = 236;
+import { SITE } from '../data/site.js';
+import Checker from './Checker.astro';
+
+const hero = SITE.posts[0]; // Hot Chocolate — the signature cup
+const second = SITE.posts[1]; // Signature drinks
 ---
-<section class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-brand-100/30">
-  <!-- Decorative background pattern -->
-  <div class="absolute inset-0 z-0 opacity-20" style="background-image: radial-gradient(#B27B41 1px, transparent 1px); background-size: 32px 32px;"></div>
-  
-  <div class="container mx-auto px-4 md:px-6 relative z-10">
-    <div class="flex flex-col lg:flex-row items-center gap-12">
-      <div class="w-full lg:w-1/2 space-y-8 text-center lg:text-left pt-10">
-        <div class="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-brand-100">
-          <span class="text-yellow-500">★</span>
-          <span class="font-semibold text-sm">{rating} on Google Reviews ({totalReviews} reviews)</span>
-        </div>
-        
-        <h1 class="text-5xl md:text-6xl lg:text-7xl font-serif font-bold leading-tight text-brand-900">
-          Discover Your <br/>
-          <span class="text-brand-500 italic relative whitespace-nowrap">
-            Perfect Nook
-            <svg class="absolute w-full h-3 -bottom-1 left-0 text-brand-500/30" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="3" fill="transparent"/></svg>
+
+<section id="top" class="grain relative overflow-hidden bg-butter pb-28 pt-14 md:pb-40 md:pt-20">
+  <!-- Organic blob highlight behind the product -->
+  <div
+    class="blob pointer-events-none absolute -top-16 right-[-12%] hidden h-[560px] w-[620px] bg-butter-2 md:block"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Checker pixel cluster, top-right -->
+  <Checker
+    class="absolute right-4 top-6 z-10 hidden md:block"
+    pattern={['1101', '0111', '1110', '1011', '0110']}
+    colorA="#F5B301"
+    colorB="#B7A9F2"
+    size={16}
+  />
+
+  <div class="relative mx-auto grid max-w-content grid-cols-1 items-center gap-10 px-5 lg:grid-cols-12 lg:gap-6">
+    <!-- ---------- Left: copy ---------- -->
+    <div class="lg:col-span-6 xl:col-span-5">
+      <p class="eyebrow mb-5 flex items-center gap-3 text-anchor/70" data-reveal>
+        <span class="inline-block h-2 w-2 rounded-full bg-anchor"></span>
+        Basra · {SITE.taglineAr}
+      </p>
+
+      <h1 class="display h-hero" data-reveal style="--d:60ms">
+        <span class="line-mask"><span style="--d:80ms">Every day</span></span>
+        <span class="line-mask"><span style="--d:220ms" class="text-anchor">Every mood.</span></span>
+      </h1>
+
+      <p class="mt-6 max-w-md text-[15px] leading-relaxed text-anchor/75" data-reveal style="--d:320ms">
+        Specialty coffee, deep hot chocolate and signature iced drinks — poured
+        beside a stone-fired kitchen in the heart of Basra. Eight years of
+        warm light, good people and a cup that knows your name.
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-4" data-reveal style="--d:420ms">
+        <a
+          href={SITE.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group inline-flex items-center gap-3 rounded-full border-2 border-anchor bg-golden py-2.5 pl-6 pr-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.2em] shadow-[0_6px_0_0_#2A1A12] transition duration-300 hover:-translate-y-1 hover:shadow-[0_11px_0_0_#2A1A12]"
+        >
+          Find us in Basra
+          <span class="flex h-9 w-9 items-center justify-center rounded-full border-2 border-anchor bg-cream transition-transform duration-300 group-hover:rotate-45">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
           </span>
-        </h1>
-        
-        <p class="text-lg md:text-xl text-brand-900/80 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-          Escape the ordinary and step into Basrah's most inviting café. Whether you're seeking a quiet corner to work, a catch-up spot with friends, or the perfect artisan brew, NooK Café welcomes you.
-        </p>
-        
-        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
-          <a href="#visit" class="inline-flex justify-center items-center px-8 py-4 bg-brand-900 text-white font-medium rounded-full hover:bg-brand-600 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-            Come Say Hello
-          </a>
-          <a href="https://www.instagram.com/nook_iraq/" target="_blank" rel="noopener noreferrer" class="inline-flex justify-center items-center px-8 py-4 bg-white text-brand-900 border-2 border-brand-100 font-medium rounded-full hover:bg-brand-50 transition-all shadow-sm">
-            Follow @nook_iraq
-          </a>
-        </div>
+        </a>
+
+        <a
+          href={SITE.phoneHref}
+          class="group inline-flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-anchor underline decoration-2 underline-offset-4"
+        >
+          Call the cafe
+          <span class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+        </a>
       </div>
-      
-      <div class="w-full lg:w-1/2 relative mt-10 lg:mt-0">
-        <div class="relative rounded-2xl overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
-          <div class="absolute inset-0 bg-brand-900/10 mix-blend-multiply"></div>
-          <img 
-            src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-            alt="Interior of NooK Cafe with warm lighting" 
-            class="w-full h-[500px] object-cover"
+
+      <!-- Stat trio -->
+      <dl
+        class="mt-12 flex flex-wrap items-end gap-x-8 gap-y-6 border-t-2 border-anchor/15 pt-6"
+        data-reveal
+        style="--d:520ms"
+      >
+        <div>
+          <dt class="sr-only">Google rating</dt>
+          <dd class="display text-4xl leading-none md:text-5xl">
+            <span data-count={SITE.rating} data-decimals="1">0</span>
+          </dd>
+          <p class="eyebrow mt-1 text-anchor/60">Google rating</p>
+        </div>
+        <div class="h-12 w-px bg-anchor/20" aria-hidden="true"></div>
+        <div>
+          <dt class="sr-only">Instagram followers</dt>
+          <dd class="display text-4xl leading-none md:text-5xl">
+            <span data-count={SITE.followers} data-suffix="" data-format="k">0</span>
+          </dd>
+          <p class="eyebrow mt-1 text-anchor/60">Instagram family</p>
+        </div>
+        <div class="h-12 w-px bg-anchor/20" aria-hidden="true"></div>
+        <div>
+          <dt class="sr-only">Years in Basra</dt>
+          <dd class="display text-4xl leading-none md:text-5xl">
+            <span data-count={SITE.yearsOpen} data-suffix="">0</span>
+          </dd>
+          <p class="eyebrow mt-1 text-anchor/60">Years in Basra</p>
+        </div>
+      </dl>
+    </div>
+
+    <!-- ---------- Right: product composition ---------- -->
+    <div class="relative lg:col-span-6 lg:col-start-7 xl:col-span-7">
+      <div class="relative mx-auto aspect-square w-full max-w-[560px]">
+        <!-- Primary product -->
+        <div
+          class="blob absolute inset-x-4 top-2 overflow-hidden border-4 border-anchor shadow-soft"
+          data-reveal
+          style="--d:260ms"
+        >
+          <img
+            src={hero.image}
+            alt="A cup of NooK Café hot chocolate with thick cocoa and soft cream"
+            width="640"
+            height="640"
+            class="h-full w-full scale-105 object-cover"
+            fetchpriority="high"
           />
         </div>
-        <!-- Floating badge -->
-        <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl border border-brand-100 hidden md:block">
-          <p class="font-serif text-2xl text-brand-900 font-bold mb-1">Basrah</p>
-          <p class="text-sm text-brand-900/60 font-medium">Downtown Escape</p>
+
+        <!-- Secondary product, overlapping at an angle -->
+        <div
+          class="absolute -bottom-2 right-0 w-[46%] rotate-6 overflow-hidden rounded-3xl border-4 border-cream bg-cream shadow-hard"
+          data-reveal
+          style="--d:420ms"
+        >
+          <img
+            src={second.image}
+            alt="NooK Café signature iced drink served in a tall glass"
+            width="400"
+            height="400"
+            loading="lazy"
+            class="h-full w-full object-cover"
+          />
         </div>
+
+        <!-- Scattered props -->
+        <span
+          class="prop absolute -left-3 top-[38%] h-12 w-12 rounded-full border-2 border-anchor bg-lavender"
+          style="--fd:.2s;--r:-8deg"
+          aria-hidden="true"
+        ></span>
+        <span
+          class="prop absolute left-[18%] -bottom-4 h-7 w-7 rotate-12 rounded-md border-2 border-anchor bg-pink"
+          style="--fd:.8s;--r:14deg"
+          aria-hidden="true"
+        ></span>
+        <span
+          class="prop absolute right-[14%] top-4 h-8 w-8 rounded-full border-2 border-anchor bg-golden"
+          style="--fd:1.1s;--r:0deg"
+          aria-hidden="true"
+        ></span>
+        <span
+          class="prop absolute -right-4 bottom-[26%] h-11 w-11 rounded-2xl border-2 border-anchor bg-butter"
+          style="--fd:.5s;--r:18deg"
+          aria-hidden="true"
+        ></span>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  /* 31,866 → "31.8K" once the counter finishes */
+  const ig = document.querySelector('[data-format="k"]');
+  if (ig) {
+    const total = Number((ig as HTMLElement).dataset.count);
+    const io = new IntersectionObserver(() => {
+      const start = performance.now();
+      const tick = (now: number) => {
+        const p = Math.min((now - start) / 1300, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        ig.textContent = ((total * eased) / 1000).toFixed(1) + 'K';
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+      io.disconnect();
+    });
+    io.observe(ig);
+  }
+</script>

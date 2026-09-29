@@ -1,0 +1,174 @@
+---
+import { SITE } from '../data/site.js';
+import Checker from './Checker.astro';
+
+const steps = [
+  {
+    num: '01',
+    label: 'Select',
+    title: 'Beans worth choosing',
+    body: 'We taste before we buy. Every roast on the shelf is one we would happily drink twice.',
+    image: SITE.posts[1].image,
+    alt: 'Signature drinks prepared at the NooK Café bar'
+  },
+  {
+    num: '02',
+    label: 'Grind',
+    title: 'Ground for the cup',
+    body: 'Espresso fine, cold brew coarse — ground fresh for whatever lands in front of you.',
+    image: SITE.posts[5].image,
+    alt: 'A Spanish latte being finished at NooK Café'
+  },
+  {
+    num: '03',
+    label: 'Brew',
+    title: 'Steamed with patience',
+    body: 'Milk to the second, cocoa stirred slow. Nothing rushed, nothing burnt.',
+    image: SITE.posts[0].image,
+    alt: 'Hot chocolate with thick cocoa at NooK Café'
+  },
+  {
+    num: '04',
+    label: 'Serve',
+    title: 'Made for your table',
+    body: 'Carried out warm, with a smile and a chair that feels like yours.',
+    image: SITE.posts[7].image,
+    alt: 'A guest’s table at NooK Café'
+  }
+];
+---
+
+<section id="craft" class="relative bg-cream-2 py-24 md:py-36">
+  <div class="mx-auto max-w-content px-5">
+    <div class="grid gap-8 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-6">
+        <p class="eyebrow text-anchor/60" data-reveal>The craft</p>
+        <h2 class="display h-section mt-6" data-reveal style="--d:60ms">
+          Simple ingredients.<br />
+          <span class="text-golden">Careful hands.</span>
+        </h2>
+      </div>
+      <div class="lg:col-span-4 lg:col-start-9">
+        <p class="text-sm leading-relaxed text-anchor/75" data-reveal style="--d:140ms">
+          Four steps, no shortcuts. It's the reason a NooK cup tastes the same
+          on a quiet Monday as it does on a packed Friday night.
+        </p>
+        <Checker
+          class="mt-6"
+          pattern={['1110', '1011', '0111']}
+          colorA="#FFE9A8"
+          colorB="#F5B301"
+          size={14}
+        />
+      </div>
+    </div>
+
+    <!-- Dark feature card -->
+    <div
+      class="mt-14 rounded-4xl border-2 border-anchor bg-anchor p-6 text-cream shadow-hard sm:p-10 md:p-12"
+      data-craft
+      data-reveal
+      style="--d:180ms"
+    >
+      {
+        steps.map((step, i) => (
+          <div class={i === 0 ? 'block' : 'hidden'} data-panel={i}>
+            <div class="grid gap-8 lg:grid-cols-12 lg:items-center">
+              <div class="lg:col-span-6">
+                <span class="flex h-11 w-11 items-center justify-center rounded-xl border-2 border-cream/30 bg-lavender font-display text-lg text-anchor">
+                  {step.num}
+                </span>
+                <p class="eyebrow mt-5 text-butter">{step.label}</p>
+                <h3 class="display mt-3 text-3xl leading-none text-cream md:text-5xl">
+                  {step.title}
+                </h3>
+                <p class="mt-4 max-w-sm text-sm leading-relaxed text-cream/75">{step.body}</p>
+              </div>
+
+              <div class="lg:col-span-5 lg:col-start-8">
+                <div class="relative">
+                  <span class="absolute left-4 top-4 h-full w-full rounded-3xl bg-pink" aria-hidden="true"></span>
+                  <img
+                    src={step.image}
+                    alt={step.alt}
+                    width="640"
+                    height="480"
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                    class="relative z-10 aspect-[4/3] w-full rounded-3xl border-2 border-cream/25 object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+
+      <!-- Tabs -->
+      <ul class="mt-10 grid gap-px border-t border-cream/25 pt-6 sm:grid-cols-2 lg:grid-cols-4" role="tablist" aria-label="Our process">
+        {
+          steps.map((step, i) => (
+            <li class="border-cream/15 sm:border-r last:sm:border-r-0">
+              <button
+                type="button"
+                role="tab"
+                id={`craft-tab-${i}`}
+                aria-controls={`craft-panel-${i}`}
+                aria-selected={i === 0 ? 'true' : 'false'}
+                class="craft-tab w-full px-1 py-4 text-left transition-colors duration-300"
+                data-tab={i}
+              >
+                <span class="block font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-butter">
+                  {step.label} <span class="text-cream/40">{step.num}</span>
+                </span>
+                <span class="display mt-2 block text-lg text-cream/70 md:text-2xl">{step.title}</span>
+              </button>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  [data-tab][aria-selected='true'] .display {
+    color: #ffe9a8;
+  }
+  [data-tab][aria-selected='true'] {
+    border-bottom: 3px solid #ff9cc2;
+  }
+  [data-panel] {
+    animation: craftIn 0.5s cubic-bezier(0.2, 0.8, 0.3, 1);
+  }
+  @keyframes craftIn {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-panel] {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('[data-tab]');
+  const panels = document.querySelectorAll<HTMLElement>('[data-panel]');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const index = Number(tab.dataset.tab);
+      tabs.forEach((t) => t.setAttribute('aria-selected', 'false'));
+      tab.setAttribute('aria-selected', 'true');
+      panels.forEach((panel, i) => {
+        panel.classList.toggle('hidden', i !== index);
+      });
+    });
+  });
+</script>

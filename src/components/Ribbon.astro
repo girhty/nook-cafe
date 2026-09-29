@@ -1,0 +1,41 @@
+---
+/**
+ * Tilted, seamless-scrolling marquee ribbon.
+ */
+const {
+  words = ['COFFEE', 'LATTE', 'CROISSANT'],
+  tone = 'pink', // 'pink' | 'golden'
+  reverse = false,
+  small = false
+} = Astro.props;
+
+const bg = tone === 'pink' ? 'bg-pink' : 'bg-golden';
+const textSize = small ? 'text-lg md:text-2xl' : 'text-2xl md:text-4xl';
+---
+
+<div
+  class={`ribbon relative z-20 -mx-[6vw] w-[112vw] -rotate-2 border-y-2 border-anchor ${bg} py-2.5 md:py-3.5`}
+  aria-hidden="true"
+>
+  <div class={`marquee flex w-max ${reverse ? 'marquee--rev' : ''}`}>
+    {
+      [0, 1].map(() => (
+        <div class="flex shrink-0 items-center">
+          {words.map((word) => (
+            <span class="flex shrink-0 items-center gap-5 px-5 md:gap-8 md:px-8">
+              <span class={`display ${textSize} whitespace-nowrap text-anchor`}>{word}</span>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="shrink-0 text-anchor" aria-hidden="true">
+                <path d="M12 0c.6 4.3 1.6 6.6 3.4 8 1.5 1.2 3.6 1.9 8.6 4-5 .9-7.1 1.6-8.6 2.8-1.8 1.4-2.8 3.7-3.4 8-.6-4.3-1.6-6.6-3.4-8C7 13.6 4.9 12.9-.1 12 4.9 11.1 7 10.4 8.6 9.2 10.2 7.8 11.4 4.3 12 0Z" />
+              </svg>
+            </span>
+          ))}
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<!-- Accessible duplicate of the ribbon content for screen readers -->
+<ul class="sr-only">
+  {words.map((w) => <li>{w}</li>)}
+</ul>

@@ -1,0 +1,140 @@
+---
+import { SITE } from '../data/site.js';
+
+const main = SITE.posts[6];
+const thumbs = [
+  { src: SITE.posts[6].image, alt: 'Guests sharing a table at NooK Café in Basra' },
+  { src: SITE.posts[2].image, alt: 'New plates coming out of the NooK Café kitchen' },
+  { src: SITE.posts[4].image, alt: 'A community evening of poetry and music hosted at NooK Café' },
+  { src: SITE.posts[8].image, alt: 'Low light and warm cups during a late night at NooK Café' },
+  { src: SITE.googlePhotos[0], alt: 'NooK Café seen from the street in Basra' }
+];
+
+const chips = ['Cozy corners', 'Freshly brewed', 'Warm light'];
+---
+
+<section id="experience" class="relative bg-cream py-24 md:py-36">
+  <div class="mx-auto max-w-content px-5">
+    <div class="grid gap-12 lg:grid-cols-12 lg:gap-10">
+      <!-- Left column -->
+      <div class="lg:col-span-5">
+        <p class="eyebrow text-anchor/60" data-reveal>The experience</p>
+        <h2 class="display h-section mt-6" data-reveal style="--d:60ms">
+          Come for the cup.<br />
+          <span class="text-golden">Stay for the moment.</span>
+        </h2>
+        <p class="mt-6 max-w-md text-[15px] leading-relaxed text-anchor/75" data-reveal style="--d:140ms">
+          Long tables, low music, a corner for two and a corner for ten. NooK
+          has hosted poetry nights, birthdays and quiet Tuesday mornings — all
+          in the same warm room.
+        </p>
+
+        <a
+          href={SITE.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group mt-8 inline-flex items-center gap-3 rounded-full border-2 border-anchor bg-butter py-2.5 pl-6 pr-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.2em] shadow-[0_6px_0_0_#2A1A12] transition duration-300 hover:-translate-y-1 hover:shadow-[0_11px_0_0_#2A1A12]"
+          data-reveal
+          style="--d:200ms"
+        >
+          Get directions
+          <span class="flex h-9 w-9 items-center justify-center rounded-full border-2 border-anchor bg-cream transition-transform duration-300 group-hover:rotate-45">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </span>
+        </a>
+
+        <ul class="mt-8 flex flex-wrap gap-3" data-reveal style="--d:260ms">
+          {
+            chips.map((chip) => (
+              <li class="rounded-full border-2 border-anchor/70 px-4 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-anchor/80">
+                {chip}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Right column: stage + thumbnails -->
+      <div class="lg:col-span-7">
+        <div
+          class="relative overflow-hidden rounded-4xl border-4 border-anchor shadow-hard"
+          data-stage
+          data-reveal
+          style="--d:120ms"
+        >
+          <img
+            src={main.image}
+            alt={thumbs[0].alt}
+            width="1000"
+            height="750"
+            loading="lazy"
+            class="aspect-[4/3] w-full object-cover transition-opacity duration-300"
+            data-stage-img
+          />
+          <span class="absolute right-4 top-4 rounded-full border-2 border-anchor bg-lavender px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.16em]">
+            In the room
+          </span>
+        </div>
+
+        <!-- Thumbnail strip -->
+        <ul class="-ml-4 mt-[-28px] flex gap-4 overflow-x-auto pb-4 pl-4 pr-2 sm:-ml-10 sm:pl-10" role="list">
+          {
+            thumbs.map((t, i) => (
+              <li class="shrink-0" data-thumb-item>
+                <button
+                  type="button"
+                  class="block h-20 w-24 overflow-hidden rounded-2xl border-4 border-cream shadow-hard-sm transition-all duration-300 sm:h-24 sm:w-28"
+                  data-thumb
+                  data-src={t.src}
+                  data-alt={t.alt}
+                  aria-label={`Show photo ${i + 1}: ${t.alt}`}
+                  aria-pressed={i === 0 ? 'true' : 'false'}
+                >
+                  <img src={t.src} alt={t.alt} width="200" height="200" loading="lazy" class="h-full w-full object-cover" />
+                </button>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  [data-thumb][aria-pressed='true'] {
+    border-color: #f5b301;
+    outline: 2px solid #2a1a12;
+    outline-offset: 2px;
+    transform: translateY(-6px) scale(1.05);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-thumb] {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const thumbs = document.querySelectorAll<HTMLButtonElement>('[data-thumb]');
+  const stageImg = document.querySelector<HTMLImageElement>('[data-stage-img]');
+
+  thumbs.forEach((thumb) => {
+    thumb.addEventListener('click', () => {
+      if (!stageImg) return;
+      thumbs.forEach((t) => t.setAttribute('aria-pressed', 'false'));
+      thumb.setAttribute('aria-pressed', 'true');
+
+      const nextSrc = thumb.dataset.src || '';
+      const nextAlt = thumb.dataset.alt || '';
+      stageImg.style.opacity = '0';
+      window.setTimeout(() => {
+        stageImg.src = nextSrc;
+        stageImg.alt = nextAlt;
+        stageImg.style.opacity = '1';
+      }, 220);
+    });
+  });
+</script>

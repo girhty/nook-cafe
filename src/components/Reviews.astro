@@ -1,0 +1,195 @@
+---
+import { SITE } from '../data/site.js';
+
+/**
+ * Every quote below is reproduced from the supplied public Instagram data,
+ * credited to its author. No reviews are invented.
+ */
+const featured = {
+  quote:
+    'شكراً … إلى نووك كافيه على دعمهم الكريم وضيافتهم للحضور. ' +
+    'An evening of poetry, music and calm, carried by NooK’s hospitality.',
+  translation:
+    '“Thank you to NooK Café for their generous support and hospitality.”',
+  name: 'قنطرة — Qantara Arts Evening',
+  role: 'Community event held at NooK',
+  avatar: SITE.posts[4].image
+};
+
+const small = [
+  {
+    quote: 'ان تكون وجهتنا للخير والسعه والفرح دائماً 💋❤️',
+    translation: '“May you always be our destination for goodness, comfort and joy.”',
+    name: '@krm.fashion',
+    role: 'Guest · Instagram',
+    avatar: SITE.posts[7].image,
+    tone: 'bg-lavender'
+  },
+  {
+    quote: `${SITE.rating} ★ on Google from ${SITE.reviewCount} reviews`,
+    translation: 'Rated by guests on Google Maps.',
+    name: 'Google Reviews',
+    role: 'Places rating',
+    avatar: SITE.googlePhotos[0],
+    tone: 'bg-golden'
+  },
+  {
+    quote: `${SITE.followersLabel} followers`,
+    translation: `${SITE.taglineAr} — the community that keeps NooK warm.`,
+    name: SITE.handle,
+    role: 'Instagram community',
+    avatar: SITE.profilePic,
+    tone: 'bg-pink'
+  }
+];
+---
+
+<section id="reviews" class="relative bg-cream pt-24 md:pt-36">
+  <!-- Faded checker lead-in -->
+  <div class="checker absolute inset-x-0 top-0 h-16 opacity-20" style="--c1:#2A1A12;--c2:#FFF7EA;--s:30px" aria-hidden="true"></div>
+
+  <div class="relative mx-auto max-w-content px-5 pb-24 md:pb-36">
+    <h2 class="display h-section mx-auto max-w-4xl text-center" data-reveal>
+      A few words from<br /><span class="text-golden">our people.</span>
+    </h2>
+
+    <!-- Featured review -->
+    <article
+      class="relative mt-14 overflow-hidden rounded-4xl border-2 border-anchor bg-cream-2 p-6 shadow-hard-sm sm:p-10"
+      data-reveal
+      style="--d:120ms"
+    >
+      <span
+        class="pointer-events-none absolute -top-10 right-4 select-none font-display text-[10rem] leading-none text-lavender"
+        aria-hidden="true"
+        >”</span
+      >
+
+      <div class="relative grid gap-8 lg:grid-cols-12 lg:items-center">
+        <div class="lg:col-span-3">
+          <img
+            id="featured-avatar"
+            src={featured.avatar}
+            alt={featured.name}
+            width="320"
+            height="320"
+            loading="lazy"
+            class="aspect-square w-full max-w-[220px] rounded-3xl border-4 border-cream object-cover shadow-hard-sm"
+          />
+        </div>
+
+        <div class="lg:col-span-9">
+          <p class="flex gap-2 text-star" aria-label={`${SITE.rating} out of 5`}>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.6 7 .9-5.1 4.8 1.3 7-6.2-3.5L5.8 21l1.3-7L2 9.5l7-.9L12 2Z"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.6 7 .9-5.1 4.8 1.3 7-6.2-3.5L5.8 21l1.3-7L2 9.5l7-.9L12 2Z"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.6 7 .9-5.1 4.8 1.3 7-6.2-3.5L5.8 21l1.3-7L2 9.5l7-.9L12 2Z"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.6 7 .9-5.1 4.8 1.3 7-6.2-3.5L5.8 21l1.3-7L2 9.5l7-.9L12 2Z"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" opacity="0.35"><path d="m12 2 3 6.6 7 .9-5.1 4.8 1.3 7-6.2-3.5L5.8 21l1.3-7L2 9.5l7-.9L12 2Z"/></svg>
+          </p>
+
+          <blockquote class="mt-5" dir="auto">
+            <p id="featured-quote" class="display h-sub leading-[1.05] text-anchor">
+              {featured.quote}
+            </p>
+          </blockquote>
+
+          <p id="featured-translation" class="mt-4 text-sm italic leading-relaxed text-anchor/70">
+            {featured.translation}
+          </p>
+
+          <footer class="mt-6 flex flex-wrap items-center justify-between gap-3 border-t-2 border-anchor/15 pt-4">
+            <div>
+              <p id="featured-name" class="font-mono text-[11px] font-bold uppercase tracking-[0.18em]">
+                {featured.name}
+              </p>
+              <p id="featured-role" class="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-anchor/55">
+                {featured.role}
+              </p>
+            </div>
+            <a
+              href={SITE.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="rounded-full border-2 border-anchor bg-lavender px-4 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.18em]"
+            >
+              See the post
+            </a>
+          </footer>
+        </div>
+      </div>
+    </article>
+
+    <!-- Small review cards -->
+    <ul class="mt-8 grid gap-5 md:grid-cols-3" role="list">
+      {
+        small.map((r, i) => (
+          <li data-reveal style={`--d:${i * 90}ms`}>
+            <button
+              type="button"
+              class="group h-full w-full rounded-4xl border-2 border-anchor bg-cream p-6 text-left transition duration-400 hover:-translate-y-2 hover:rotate-[-1deg] hover:shadow-hard-sm"
+              data-promote
+              data-quote={r.quote}
+              data-translation={r.translation}
+              data-name={r.name}
+              data-role={r.role}
+              data-avatar={r.avatar}
+            >
+              <span class="flex items-center gap-3">
+                <img
+                  src={r.avatar}
+                  alt=""
+                  width="80"
+                  height="80"
+                  loading="lazy"
+                  class={`h-12 w-12 rounded-full border-2 border-anchor object-cover ${r.tone}`}
+                />
+                <span>
+                  <span class="block font-mono text-[11px] font-bold uppercase tracking-[0.16em]">
+                    {r.name}
+                  </span>
+                  <span class="mt-0.5 block font-mono text-[9px] uppercase tracking-[0.16em] text-anchor/55">
+                    {r.role}
+                  </span>
+                </span>
+              </span>
+              <span class="mt-4 block text-sm leading-relaxed text-anchor/80" dir="auto">
+                {r.quote}
+              </span>
+              <span class="mt-4 inline-flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-anchor/60">
+                Feature this
+                <span aria-hidden="true" class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+              </span>
+            </button>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="mt-8 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-anchor/50">
+      Rated {SITE.rating} from {SITE.reviewCount} Google reviews · Quotes reproduced from public Instagram posts
+    </p>
+  </div>
+</section>
+
+<script>
+  const quoteEl = document.getElementById('featured-quote');
+  const transEl = document.getElementById('featured-translation');
+  const nameEl = document.getElementById('featured-name');
+  const roleEl = document.getElementById('featured-role');
+  const avatarEl = document.getElementById('featured-avatar') as HTMLImageElement | null;
+
+  document.querySelectorAll<HTMLButtonElement>('[data-promote]').forEach((card) => {
+    card.addEventListener('click', () => {
+      if (!quoteEl || !transEl || !nameEl || !roleEl) return;
+      quoteEl.textContent = card.dataset.quote || '';
+      transEl.textContent = card.dataset.translation || '';
+      nameEl.textContent = card.dataset.name || '';
+      roleEl.textContent = card.dataset.role || '';
+      if (avatarEl && card.dataset.avatar) {
+        avatarEl.src = card.dataset.avatar;
+        avatarEl.alt = card.dataset.name || '';
+      }
+      document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>

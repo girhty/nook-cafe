@@ -1,0 +1,225 @@
+---
+import { SITE } from '../data/site.js';
+import Checker from './Checker.astro';
+
+const products = [
+  {
+    name: 'Spanish Latte',
+    note: 'Espresso · Condensed milk · Caramel',
+    image: SITE.posts[5].image,
+    tag: 'House favourite'
+  },
+  {
+    name: 'Hot Chocolate',
+    note: 'Dark cocoa · Steamed milk · Cream',
+    image: SITE.posts[0].image,
+    tag: 'Barista’s pick'
+  },
+  {
+    name: 'NooK Signature Iced',
+    note: 'Cold brew · Signature syrup · Ice',
+    image: SITE.posts[1].image,
+    tag: 'New release'
+  },
+  {
+    name: 'Stone-Fired Pizza',
+    note: 'Fresh dough · Stone oven · Chef NooK',
+    image: SITE.posts[3].image,
+    tag: 'From the kitchen'
+  }
+];
+---
+
+<section id="menu" class="relative bg-anchor pb-32 pt-24 text-cream md:pb-40 md:pt-36">
+  <div class="mx-auto max-w-content px-5">
+    <p class="eyebrow text-butter" data-reveal>Signature menu</p>
+
+    <div class="mt-6 grid gap-8 lg:grid-cols-12 lg:items-end">
+      <h2 class="display h-section text-butter lg:col-span-7" data-reveal style="--d:60ms">
+        A little different.<br />
+        <span class="text-cream">Deliciously so.</span>
+      </h2>
+
+      <div class="lg:col-span-4 lg:col-start-9">
+        <p class="text-sm leading-relaxed text-cream/75" data-reveal style="--d:160ms">
+          Everything is made to order — beans ground for the cup, milk steamed
+          to the second, dough stretched by hand. Prices live on the board in
+          store; ask the barista what's pouring today.
+        </p>
+        <Checker
+          class="mt-6"
+          pattern={['1011', '1100', '0111', '1110']}
+          colorA="#B7A9F2"
+          colorB="#F5B301"
+          size={14}
+        />
+      </div>
+    </div>
+
+    <!-- ---------- Carousel ---------- -->
+    <div class="mt-14" data-menu>
+      <ul
+        class="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-10 pt-16 sm:gap-7 lg:overflow-visible lg:pb-0"
+        role="list"
+      >
+        {
+          products.map((p, i) => (
+            <li class="w-[78vw] shrink-0 snap-center sm:w-[52vw] md:w-[40vw] lg:w-auto lg:flex-1" data-card>
+              <article class="menu-card relative rounded-4xl border-2 border-cream/20 bg-cream-2 px-5 pb-6 pt-4 text-anchor transition-all duration-500">
+                <button
+                  type="button"
+                  class="group block w-full text-left"
+                  data-pick
+                  aria-pressed={i === 0 ? 'true' : 'false'}
+                  aria-label={`Select ${p.name}`}
+                >
+                  <span class="relative z-10 -mt-14 mb-4 block h-28 w-28 overflow-hidden rounded-3xl border-4 border-anchor bg-cream shadow-hard-sm md:h-32 md:w-32">
+                    <img
+                      src={p.image}
+                      alt={`${p.name} at NooK Café`}
+                      width="320"
+                      height="320"
+                      loading="lazy"
+                      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </span>
+
+                  <span
+                    class="inline-block rounded-full border-2 border-anchor bg-lavender px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.16em]"
+                    data-chip
+                  >
+                    {p.tag}
+                  </span>
+
+                  <h3 class="display mt-3 text-2xl leading-none md:text-3xl">{p.name}</h3>
+                  <p class="mt-2 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-anchor/60">
+                    {p.note}
+                  </p>
+                </button>
+
+                <!-- Featured-only controls -->
+                <div class="mt-5 hidden" data-details>
+                  <fieldset>
+                    <legend class="eyebrow text-anchor/60">Size</legend>
+                    <div class="mt-2 flex gap-2">
+                      {['S', 'M', 'L'].map((s) => (
+                        <span class="flex h-9 w-9 items-center justify-center rounded-full border-2 border-anchor bg-cream font-mono text-[11px] font-bold">
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+                  </fieldset>
+
+                  <div class="mt-4">
+                    <label
+                      for={`intensity-${i}`}
+                      class="eyebrow text-anchor/60"
+                    >
+                      Intensity
+                    </label>
+                    <input
+                      id={`intensity-${i}`}
+                      type="range"
+                      min="0"
+                      max="100"
+                      value="65"
+                      class="mt-2 w-full accent-anchor"
+                    />
+                    <div class="flex justify-between font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-anchor/60">
+                      <span>Mild</span><span>Bold</span>
+                    </div>
+                  </div>
+
+                  <a
+                    href={SITE.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="mt-5 flex items-center justify-center gap-2 rounded-full border-2 border-anchor bg-anchor px-5 py-3 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-cream transition hover:-translate-y-0.5"
+                  >
+                    Ask in store
+                  </a>
+                </div>
+              </article>
+            </li>
+          ))
+        }
+      </ul>
+
+      <!-- Arrows -->
+      <div class="mt-6 flex items-center gap-3">
+        <button
+          type="button"
+          data-prev
+          class="flex h-12 w-12 items-center justify-center rounded-full border-2 border-cream bg-butter text-anchor transition hover:-translate-y-0.5 hover:bg-golden"
+          aria-label="Previous item"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M19 12H5M11 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          data-next
+          class="flex h-12 w-12 items-center justify-center rounded-full border-2 border-cream bg-butter text-anchor transition hover:-translate-y-0.5 hover:bg-golden"
+          aria-label="Next item"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </button>
+        <p class="ml-2 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-cream/50">
+          Tap a card to feature it
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkerboard seam out of the dark band -->
+  <div class="checker absolute inset-x-0 bottom-0 h-14 md:h-20" style="--c1:#2A1A12;--c2:#FFF7EA;--s:34px" aria-hidden="true"></div>
+</section>
+
+<style>
+  .menu-card.is-active {
+    background-color: #ffe9a8;
+    border-color: #fff7ea;
+    transform: translateY(-10px) scale(1.045);
+    box-shadow: 0 18px 0 -6px rgba(255, 156, 194, 0.85);
+  }
+  .menu-card.is-active [data-chip] {
+    background-color: #ff9cc2;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .menu-card,
+    .menu-card.is-active {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  const root = document.querySelector('[data-menu]');
+  if (root) {
+    const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-card]'));
+    let active = 0;
+
+    const setActive = (i: number) => {
+      active = (i + cards.length) % cards.length;
+      cards.forEach((card, idx) => {
+        const on = idx === active;
+        card.querySelector('.menu-card')?.classList.toggle('is-active', on);
+        const pick = card.querySelector<HTMLButtonElement>('[data-pick]');
+        pick?.setAttribute('aria-pressed', String(on));
+        const details = card.querySelector<HTMLElement>('[data-details]');
+        details?.classList.toggle('hidden', !on);
+      });
+    };
+
+    cards.forEach((card, i) => {
+      card.querySelector('[data-pick]')?.addEventListener('click', () => setActive(i));
+    });
+    root.querySelector('[data-prev]')?.addEventListener('click', () => setActive(active - 1));
+    root.querySelector('[data-next]')?.addEventListener('click', () => setActive(active + 1));
+    setActive(0);
+  }
+</script>

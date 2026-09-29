@@ -1,10 +1,11 @@
 import { defineConfig } from 'astro/config';
-import tailwind from "@astrojs/tailwind";
+import tailwind from '@astrojs/tailwind';
 
-// https://astro.build/config
+// Static output only — no SSR adapters.
 export default defineConfig({
   base: '/nook-cafe/',
+  site: 'https://nook-cafe.example',
   output: 'static',
-  integrations: [tailwind({ applyBaseStyles: false })],
-  site: 'https://nook-cafe.astro.build'
+  integrations: [tailwind({ applyBaseStyles: true })],
+  build: { inlineStylesheets: 'auto' },
 });

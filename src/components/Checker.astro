@@ -1,0 +1,67 @@
+---
+/**
+ * Crisp pixel cluster. Cells fade in one by one when scrolled into view.
+ * `pattern` is a string of '1' (filled with colorA) and '0' (colorB) rows.
+ */
+const {
+  pattern = ['1011', '1101', '0111', '1110'],
+  colorA = '#F5B301',
+  colorB = '#B7A9F2',
+  size = 18,
+  class: klass = ''
+} = Astro.props;
+
+let index = 0;
+const cells = pattern.flatMap((row, r) =>
+  row.split('').map((cell, c) => {
+    index += 1;
+    return { on: cell === '1', r, c, delay: index * 45 };
+  })
+);
+---
+
+<div
+  class={`grid ${klass}`}
+  style={`grid-template-columns: repeat(${pattern[0].length}, ${size}px); gap:2px;`}
+  data-checker
+  aria-hidden="true"
+>
+  {
+    cells.map((cell) => (
+      <span
+        class="block"
+        style={`width:${size}px;height:${size}px;background:${
+          cell.on ? colorA : colorB
+        };opacity:0;transition:opacity .45s ease ${cell.delay}ms;`}
+        data-cell
+        data-delay={cell.delay}
+      />
+    ))
+  }
+</div>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clusters = document.querySelectorAll('[data-checker]');
+  const show = (el: Element) => {
+    el.querySelectorAll('[data-cell]').forEach((cell) => {
+      (cell as HTMLElement).style.opacity = '1';
+    });
+  };
+  if (reduce) {
+    clusters.forEach(show);
+  } else {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            show(e.target);
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    clusters.forEach((el) => io.observe(el));
+  }
+</script>
