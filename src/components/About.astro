@@ -1,69 +1,42 @@
 ---
-import { SITE } from '../data/site.js';
-
-const photoA = SITE.posts[1];
-const photoB = SITE.posts[4];
+const img1 = 'https://scontent-ams2-1.cdninstagram.com/v/t51.71878-15/723084552_929701646793032_3124892960806151362_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=FUr4mJCrm54Q7kNvwGthgsk&_nc_oc=AdpJNeNlNduYWcqSrMN5kuVhvnkswPzoTk_MuMWJZYuHaFy-jT5qUrS78mwXhuibumQ&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=iAL__7EhTh02EJiDKyhXhA&_nc_ss=7ba8c&oh=00_AQMkKe1cggRFriCOwEA8wQuukweT1Ai7Xr--_vlTR5X7Ew&oe=6AC12904';
+const img2 = 'https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/671234508_18045341414597058_7057541260264360990_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=ED52dA3hlsAQ7kNvwFn_XuV&_nc_oc=Adr3vh_kORnVLnOpcxJbsE3dQQ0azeX0ONsu30U_jHadkJpEwSv6T8LRtVGd868flIs&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=iAL__7EhTh02EJiDKyhXhA&_nc_ss=7ba8c&oh=00_AQMVW4IjdI3j9bvpAsKwMliiibIkpV_nFv4atrYHYvrHKg&oe=6AC13A00';
 ---
+<section id="about" class="relative bg-cream py-28 md:py-40">
+  <div class="container-x relative">
+    <!-- Floating tilted photos -->
+    <img
+      src={img1}
+      alt="Inside NooK Café"
+      loading="lazy"
+      class="reveal absolute -left-2 top-6 hidden w-44 -rotate-[8deg] rounded-[18px] border-[6px] border-cream object-cover shadow-chunk-pink md:block"
+      style="transition-delay:120ms"
+    />
+    <img
+      src={img2}
+      alt="NooK community moment"
+      loading="lazy"
+      class="reveal absolute -right-4 bottom-10 hidden w-52 rotate-[6deg] rounded-[18px] border-[6px] border-cream object-cover shadow-chunk-lav md:block"
+      style="transition-delay:240ms"
+    />
 
-<section id="about" class="relative overflow-hidden bg-cream py-24 md:py-36">
-  <div class="mx-auto max-w-content px-5">
-    <div class="relative mx-auto max-w-4xl text-center">
-      <!-- Tilted photo, left -->
-      <figure
-        class="absolute -left-4 top-0 hidden w-40 -rotate-6 overflow-hidden rounded-2xl border-[6px] border-cream shadow-hard-sm md:block lg:-left-24 lg:w-48"
-        data-reveal
-        style="--d:120ms"
-      >
-        <img
-          src={photoA.image}
-          alt="NooK Café signature drinks lined up on the bar"
-          width="320"
-          height="320"
-          loading="lazy"
-          class="aspect-square w-full object-cover"
-        />
-      </figure>
-
-      <!-- Tilted photo, right -->
-      <figure
-        class="absolute -right-4 bottom-4 hidden w-40 rotate-6 overflow-hidden rounded-2xl border-[6px] border-butter shadow-hard-sm md:block lg:-right-24 lg:w-48"
-        data-reveal
-        style="--d:260ms"
-      >
-        <img
-          src={photoB.image}
-          alt="Guests sharing an evening at a NooK Café community event"
-          width="320"
-          height="320"
-          loading="lazy"
-          class="aspect-square w-full object-cover"
-        />
-      </figure>
-
-      <p class="eyebrow text-anchor/60" data-reveal>About us</p>
-
-      <h2 class="display h-sub mt-6 leading-[1.05]" data-reveal style="--d:80ms">
-        We keep the lights warm and the cups full — eight years in Basra, one mood
-        only: good.
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow reveal">About Us · قصتنا</p>
+      <h2 class="display reveal mt-5 text-4xl text-anchor sm:text-5xl md:mt-6 md:text-7xl" style="transition-delay:120ms">
+        <span class="block">A Small Corner of Basra</span>
+        <span class="block">Where Every Cup <span class="text-stroke-anchor">Carries</span> a Mood.</span>
       </h2>
-
-      <a
-        href="#menu"
-        class="group mt-10 inline-flex items-center gap-3 rounded-full border-2 border-anchor bg-pink py-2.5 pl-6 pr-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.2em] shadow-[0_6px_0_0_#2A1A12] transition duration-300 hover:-translate-y-1 hover:shadow-[0_11px_0_0_#2A1A12]"
-        data-reveal
-        style="--d:180ms"
-      >
-        See the signature menu
-        <span class="flex h-9 w-9 items-center justify-center rounded-full border-2 border-anchor bg-cream transition-transform duration-300 group-hover:rotate-45">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M5 12h14M13 6l6 6-6 6" />
-          </svg>
-        </span>
-      </a>
-
-      <p class="mt-8 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-anchor/50" data-reveal style="--d:240ms">
-        {SITE.taglineAr} · {SITE.tagline}
+      <p class="reveal mx-auto mt-7 max-w-xl text-base leading-relaxed text-anchor/75 md:text-lg" style="transition-delay:240ms">
+        We started NooK to give Basra a quiet, generous place to think, talk, and taste. Eight
+        years on, the espresso still pulls, the dough still proofs, and the door is still
+        open to whoever needs the room.
       </p>
+      <div class="reveal mt-9" style="transition-delay:340ms">
+        <a href="#craft" class="pill-primary">
+          How we brew it
+          <span class="arrow-chip"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 19L19 5M19 5H8M19 5v11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+      </div>
     </div>
   </div>
 </section>

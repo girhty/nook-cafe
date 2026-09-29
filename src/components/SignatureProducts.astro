@@ -1,0 +1,215 @@
+---
+import PixelCluster from './PixelCluster.astro';
+
+type Product = {
+  name: string;
+  tag: string;
+  blurb: string;
+  img: string;
+  intensity?: 'Mild' | 'Balanced' | 'Bold';
+  size?: 'S' | 'M' | 'L';
+  featured?: boolean;
+  priceChip?: string;
+};
+
+const products: Product[] = [
+  {
+    name: 'Spanish Latte',
+    tag: 'Signature · Cold',
+    blurb: 'Espresso pulled slow, milk steamed sweet, poured over ice.',
+    img: 'https://scontent-ams2-1.cdninstagram.com/v/t51.71878-15/671194837_1679303053199025_3183664580661757338_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=66VfsPyXugsQ7kNvwFDCvFh&_nc_oc=Adqw1jUC_xD3ZVhIm-KZGBdZ9hgUr9g0SlYU09nq6D4yuirFp92NRdl9YcDp09kmbog&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=iAL__7EhTh02EJiDKyhXhA&_nc_ss=7ba8c&oh=00_AQNJI8DQ7T34tKLeh5K6hUedOLfjOpfPATa6CZDYqyeFwg&oe=6AC112D5',
+    intensity: 'Balanced',
+    size: 'M',
+    featured: true,
+    priceChip: 'View on menu',
+  },
+  {
+    name: 'Hot Chocolate',
+    tag: 'Cocoa · Steamed',
+    blurb: 'Belgian cocoa, dark and milky, finished with a soft crown.',
+    img: 'https://scontent-ams2-1.cdninstagram.com/v/t51.71878-15/605284339_1905742720329149_581982739458372117_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=2fz6fKA10W4Q7kNvwG5Lztp&_nc_oc=Adq7M0ZbnqnNhXh0EGq3h7FUh8PfIL2vA0pe8S-MEIPvhI1NFG1IBX0xCrv3apsdk0Q&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=iAL__7EhTh02EJiDKyhXhA&_nc_ss=7ba8c&oh=00_AQMtJrnEXJMXPvTdJYX2XAmNcX4Mxo2lIJ9zLmfiQIrQvA&oe=6AC12630',
+    intensity: 'Mild',
+    size: 'M',
+    priceChip: 'View on menu',
+  },
+  {
+    name: 'Signature Cold',
+    tag: 'House Brew',
+    blurb: 'Our slow-drip house blend, bright and round over ice.',
+    img: 'https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/749440596_18122789392707619_327884191046454746_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=v-HZ9u9HcMoQ7kNvwHaYvZ0&_nc_oc=AdpX6ODiO4ENF1jbplfANsGyenRTEEfc7X9rYf_ghMXVBJ_kKHOUsU576d4dYLjnsxY&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=iAL__7EhTh02EJiDKyhXhA&_nc_ss=7ba8c&oh=00_AQM6VoilIvPdMMrnRWXHtMY5gDlfauH5ujx9zCAmyoEovw&oe=6AC1182A',
+    intensity: 'Bold',
+    size: 'L',
+    priceChip: 'View on menu',
+  },
+  {
+    name: 'Pizza Margherita',
+    tag: 'Italian · Stone-Oven',
+    blurb: 'Slow-fermented dough, San Marzano, fresh mozzarella, basil.',
+    img: 'https://scontent-ams2-1.cdninstagram.com/v/t51.71878-15/714486343_3073292689727646_1763272717937354963_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=105&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=Tmmtxq_iYYIQ7kNvwH_vMvx&_nc_oc=AdpNVJ8LX0YjJKNLnOO8HTe64PuNiWCkPhtxCt_p4DzgphJw6HRqnLVapBGqdm6y2PU&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=iAL__7EhTh02EJiDKyhXhA&_nc_ss=7ba8c&oh=00_AQN8TaxFVddVpqeFLV0tEHpnlSxT1cuTva5h8Yc_WDK9IA&oe=6AC12D6E',
+    intensity: 'Bold',
+    size: 'L',
+    priceChip: 'View on menu',
+  },
+];
+---
+<section id="menu" class="relative bg-anchor py-28 text-cream md:py-40">
+  <!-- Subtle paper grain -->
+  <div class="absolute inset-0 opacity-[0.08] pointer-events-none" style="background-image:url('data:image/svg+xml,%3Csvg viewBox=%270 0 200 200%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.9%27 numOctaves=%272%27 stitchTiles=%27stitch%27/%3E%3CfeColorMatrix values=%270 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.3 0%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27/%3E%3C/svg%3E')"></div>
+
+  <div class="container-x relative">
+    <div class="grid items-end gap-6 md:grid-cols-12">
+      <div class="md:col-span-7">
+        <p class="eyebrow reveal text-cream/70">Signature Drinks & Bites · القائمة المميزة</p>
+        <h2 class="display reveal mt-4 text-5xl text-butter sm:text-6xl md:text-[88px] md:leading-[0.85]" style="transition-delay:120ms">
+          <span class="block">A Little Different.</span>
+          <span class="block text-cream">Deliciously So.</span>
+        </h2>
+      </div>
+      <div class="md:col-span-5 md:pl-6">
+        <p class="reveal max-w-md text-base leading-relaxed text-cream/75" style="transition-delay:240ms">
+          The four we pour most often. Each one built around a single, honest idea — let the
+          ingredient speak, then dress it up just enough.
+        </p>
+        <div class="mt-5 hidden md:block">
+          <PixelCluster variant="lav-butter" rows={4} cols={4} size={12} />
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel -->
+    <div class="reveal mt-14 md:mt-20" style="transition-delay:300ms">
+      <div class="relative">
+        <div class="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-6 md:grid md:grid-cols-4 md:gap-6 md:overflow-visible md:pb-0" id="product-rail">
+          {products.map((p, idx) => (
+            <article
+              class={`group relative flex min-w-[78%] flex-col rounded-[28px] border-2 transition-all duration-500 snap-center md:min-w-0 ${
+                p.featured
+                  ? 'bg-butter text-anchor border-anchor shadow-chunk md:scale-[1.06] md:-translate-y-3 md:z-10'
+                  : 'bg-cream text-anchor border-anchor/10 shadow-chunk-pink hover:shadow-chunk-lav'
+              }`}
+              style={`transition-delay:${idx * 90}ms`}
+            >
+              <!-- Price chip -->
+              <span
+                class={`absolute -top-3 left-6 z-10 rounded-full px-3 py-1 font-mono text-[10px] uppercase tracking-mono shadow-soft ${
+                  p.featured ? 'bg-pop-pink text-anchor' : 'bg-pop-lavender text-anchor'
+                }`}
+              >
+                {p.priceChip}
+              </span>
+
+              <!-- Image -->
+              <div class="relative">
+                <img
+                  src={p.img}
+                  alt={p.name}
+                  loading="lazy"
+                  class={`aspect-square w-full rounded-t-[26px] object-cover ${
+                    p.featured ? '' : ''
+                  }`}
+                  style={p.featured ? 'border-bottom: 4px solid #2E1A12;' : ''}
+                />
+              </div>
+
+              <!-- Body -->
+              <div class={`flex flex-1 flex-col p-5 ${p.featured ? 'pt-6' : 'pt-5'}`}>
+                <p class={`eyebrow ${p.featured ? 'text-anchor/70' : 'text-anchor/60'}`}>{p.tag}</p>
+                <h3 class={`display mt-2 ${p.featured ? 'text-3xl md:text-4xl' : 'text-2xl md:text-3xl'} text-anchor`}>{p.name}</h3>
+                <p class={`mt-2 text-sm leading-relaxed ${p.featured ? 'text-anchor/85' : 'text-anchor/70'}`}>{p.blurb}</p>
+
+                {p.featured && (
+                  <>
+                    <!-- Size selector -->
+                    <div class="mt-5 flex items-center gap-2">
+                      <span class="font-mono text-[10px] uppercase tracking-mono text-anchor/70 mr-1">Size</span>
+                      {(['S', 'M', 'L'] as const).map((s, i) => (
+                        <button
+                          type="button"
+                          class={`grid h-8 w-8 place-items-center rounded-full font-mono text-[11px] uppercase tracking-mono transition ${
+                            p.size === s
+                              ? 'bg-anchor text-cream'
+                              : 'border-2 border-anchor text-anchor hover:bg-anchor hover:text-cream'
+                          }`}
+                          aria-label={`Size ${s}`}
+                        >{s}</button>
+                      ))}
+                    </div>
+
+                    <!-- Intensity slider -->
+                    <div class="mt-5">
+                      <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-mono text-anchor/70">
+                        <span>Mild</span><span>Bold</span>
+                      </div>
+                      <div class="relative mt-2 h-2 rounded-full bg-anchor/15">
+                        <div
+                          class="absolute inset-y-0 left-0 rounded-full bg-anchor"
+                          style={`width: ${
+                            p.intensity === 'Mild' ? '30%' : p.intensity === 'Balanced' ? '55%' : '85%'
+                          };`}
+                        ></div>
+                        <span
+                          class="absolute -top-1.5 grid h-5 w-5 place-items-center rounded-full bg-pop-pink ring-2 ring-butter"
+                          style={`left: ${
+                            p.intensity === 'Mild' ? '25%' : p.intensity === 'Balanced' ? '50%' : '80%'
+                          }; transform: translateX(-50%);`}
+                        ></span>
+                      </div>
+                    </div>
+
+                    <a
+                      href="https://nook-iraq.com/menu"
+                      target="_blank"
+                      rel="noopener"
+                      class="pill-primary mt-6 w-full justify-center"
+                    >
+                      View on menu
+                      <span class="arrow-chip"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 19L19 5M19 5H8M19 5v11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                    </a>
+                  </>
+                )}
+
+                {!p.featured && (
+                  <a
+                    href="https://nook-iraq.com/menu"
+                    target="_blank"
+                    rel="noopener"
+                    class="pill mt-5 w-full justify-center bg-butter text-anchor"
+                  >
+                    View on menu
+                    <span class="arrow-chip"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 19L19 5M19 5H8M19 5v11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  </a>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <!-- Arrow controls -->
+        <div class="mt-8 flex items-center justify-center gap-4 md:hidden">
+          <button type="button" class="grid h-12 w-12 place-items-center rounded-full border-2 border-cream text-cream" aria-label="Previous product">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button type="button" class="grid h-12 w-12 place-items-center rounded-full border-2 border-cream text-cream" aria-label="Next product">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inline note about full menu -->
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+      <span class="pill bg-cream/10 text-cream">Full menu lives at nook-iraq.com/menu</span>
+      <a href="https://nook-iraq.com/menu" target="_blank" rel="noopener" class="pill bg-butter text-anchor">
+        See it all
+        <span class="arrow-chip"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 19L19 5M19 5H8M19 5v11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Checkerboard edge -->
+  <div class="absolute -bottom-1 left-0 right-0 grid h-10 grid-cols-12 md:h-14" aria-hidden="true">
+    {Array.from({ length: 24 }).map((_, i) => (
+      <span class={i % 2 === 0 ? 'bg-anchor' : 'bg-cream'}></span>
+    ))}
+  </div>
+</section>

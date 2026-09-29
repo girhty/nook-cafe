@@ -1,0 +1,170 @@
+---
+import Marquee from './Marquee.astro';
+
+const heroImg = 'https://scontent-ams2-1.cdninstagram.com/v/t51.71878-15/605284339_1905742720329149_581982739458372117_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=2fz6fKA10W4Q7kNvwG5Lztp&_nc_oc=Adq7M0ZbnqnNhXh0EGq3h7FUh8PfIL2vA0pe8S-MEIPvhI1NFG1IBX0xCrv3apsdk0Q&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=iAL__7EhTh02EJiDKyhXhA&_nc_ss=7ba8c&oh=00_AQMtJrnEXJMXPvTdJYX2XAmNcX4Mxo2lIJ9zLmfiQIrQvA&oe=6AC12630';
+const logo = 'https://scontent-ams2-1.cdninstagram.com/v/t51.82787-19/752682442_18123178903707619_8012619269466550386_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=110&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy45NTEuQzMifQ%3D%3D&_nc_ohc=yNp92vqcr54Q7kNvwHqnp4c&_nc_oc=AdoJkLHWrVg2gHJqggvC-_UxKsVZbUgBt0vgOFCORWfQoCTmQGury6TQwVs79x8wTQQ&_nc_zt=24&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=z49Rb442usHEBRVcn9quHg&_nc_ss=7ba8c&oh=00_AQNzEyerPYRL3RJuKQp_zofKmpmm3IV8tAbZgyIhujoS6Q&oe=6AC10A94';
+
+const address = 'شارع سيد حاميد، الفرع المجاور لمطعم الحسون, Basrah, Basra Governorate, 61001, Iraq';
+const phone = '+964 772 510 0008';
+const phone2 = '+964 782 510 0008';
+const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=NooK+Cafe+Basra+Iraq';
+---
+<section id="visit" class="relative">
+  <!-- Second marquee ribbon -->
+  <div class="relative">
+    <Marquee
+      words={['Follow @nook_iraq', 'Basra', 'Every Day Mood', 'Eight Years Strong', 'See You Soon']}
+      variant="butter"
+      glyph="✶"
+      reverse={true}
+      tilt={2.4}
+    />
+  </div>
+
+  <footer class="relative overflow-hidden bg-anchor text-cream">
+    <!-- decorative scatter -->
+    <span class="sticker left-[6%] top-[10%] h-8 w-8 rounded-full bg-pop-pink shadow-chunk animate-float-slow"></span>
+    <span class="sticker right-[10%] top-[18%] h-6 w-6 rounded-full bg-butter animate-float-med"></span>
+    <span class="sticker left-[14%] bottom-[14%] h-10 w-10 rounded-full bg-pop-lavender shadow-chunk-pink animate-float-slow" style="animation-delay:.4s"></span>
+
+    <div class="container-x relative grid gap-12 py-20 md:grid-cols-12 md:gap-10 md:py-28">
+      <!-- Left: hero product + decorative scatter -->
+      <div class="relative md:col-span-5">
+        <div class="relative aspect-square w-full max-w-[420px]">
+          <img
+            src={heroImg}
+            alt="NooK signature cup"
+            loading="lazy"
+            class="reveal absolute left-[6%] top-[10%] aspect-square w-[72%] -rotate-[6deg] rounded-[36px] border-[6px] border-cream object-cover shadow-chunk-pink"
+          />
+          <img
+            src={heroImg}
+            alt="NooK cup"
+            loading="lazy"
+            class="reveal absolute right-[2%] bottom-[6%] aspect-square w-[44%] rotate-[8deg] rounded-[24px] border-[5px] border-cream object-cover shadow-chunk"
+            style="transition-delay:200ms"
+          />
+          <span class="sticker right-[6%] top-[2%] rotate-[-8deg] rounded-2xl border-2 border-cream bg-butter px-3 py-1.5 font-mono text-[10px] uppercase tracking-mono text-anchor">
+            See You Soon ★
+          </span>
+        </div>
+      </div>
+
+      <!-- Center-right: info cards -->
+      <div class="md:col-span-6 md:col-start-7">
+        <p class="eyebrow reveal text-cream/60">Visit · زورونا</p>
+        <h2 class="display reveal mt-3 text-5xl text-cream sm:text-6xl md:text-7xl md:leading-[0.85]" style="transition-delay:100ms">
+          <span class="block">Pull Up a Chair.</span>
+          <span class="block text-butter">We'll Be Ready.</span>
+        </h2>
+
+        <!-- Address card -->
+        <div class="reveal mt-8 rounded-[28px] border-2 border-cream/20 bg-cream p-6 text-anchor shadow-chunk md:p-7" style="transition-delay:200ms">
+          <p class="font-mono text-[11px] uppercase tracking-mono text-anchor/60">Address · العنوان</p>
+          <p class="display mt-2 text-2xl text-anchor md:text-3xl md:leading-[1.05]">{address}</p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a href={mapsUrl} target="_blank" rel="noopener" class="pill bg-pop-lavender text-anchor hover:bg-pop-lavenderDeep hover:text-cream">
+              Open in Maps
+              <span class="arrow-chip"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="2"/></svg></span>
+            </a>
+            <a href={`tel:${phone.replace(/\s/g, '')}`} class="pill border-2 border-anchor text-anchor hover:bg-anchor hover:text-cream">
+              Call {phone}
+            </a>
+          </div>
+        </div>
+
+        <!-- Hours card -->
+        <div class="reveal mt-5 rounded-[28px] border-2 border-anchor bg-butter p-6 text-anchor shadow-chunk md:p-7" style="transition-delay:300ms">
+          <div class="flex items-start justify-between">
+            <div>
+              <p class="font-mono text-[11px] uppercase tracking-mono text-anchor/60">Hours · ساعات العمل</p>
+              <p class="display mt-2 text-2xl text-anchor md:text-3xl">See You There.</p>
+            </div>
+            <span class="hidden md:flex items-center gap-2 rounded-full bg-anchor px-3 py-1.5 font-mono text-[10px] uppercase tracking-mono text-butter">
+              <span class="h-2 w-2 rounded-full bg-butter animate-pulse"></span>
+              Currently Reopening
+            </span>
+          </div>
+          <ul class="mt-5 grid gap-2 font-mono text-sm text-anchor/85">
+            <li class="flex items-center justify-between border-b border-anchor/15 pb-2">
+              <span>Sun — Thu</span><span class="text-anchor/60">Posted on the door</span>
+            </li>
+            <li class="flex items-center justify-between border-b border-anchor/15 pb-2">
+              <span>Fri — Sat</span><span class="text-anchor/60">Posted on the door</span>
+            </li>
+            <li class="flex items-center justify-between">
+              <span>Status</span>
+              <span class="font-mono text-[10px] uppercase tracking-mono text-pop-pinkDeep">Searching for a new home</span>
+            </li>
+          </ul>
+          <p class="mt-4 text-xs text-anchor/70">
+            Hours are posted in-store daily. Follow <a href="https://instagram.com/nook_iraq" class="underline" target="_blank" rel="noopener">@nook_iraq</a> for live updates as we reopen in our new space.
+          </p>
+        </div>
+      </div>
+
+      <!-- Vertical SAY HELLO tab -->
+      <a
+        href={`tel:${phone.replace(/\s/g, '')}`}
+        class="absolute right-3 top-1/2 hidden -translate-y-1/2 rotate-90 origin-center md:block"
+        aria-label="Say hello"
+      >
+        <span class="inline-flex items-center gap-2 rounded-full bg-pop-lavender px-3 py-1.5 font-mono text-[10px] uppercase tracking-mono text-anchor shadow-soft">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M22 16.92V21a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 5.18 2 2 0 0 1 4.11 3h4a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L9.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 17.92z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          Say Hello
+        </span>
+      </a>
+    </div>
+
+    <!-- Bottom row -->
+    <div class="relative border-t border-cream/15">
+      <div class="container-x grid gap-8 py-10 md:grid-cols-12 md:items-center md:gap-10">
+        <div class="md:col-span-4 flex items-center gap-4">
+          <img src={logo} alt="NooK logo" class="h-12 w-12 rounded-full border-2 border-cream object-cover" loading="lazy" />
+          <div>
+            <p class="display text-xl text-butter">NooK Café</p>
+            <p class="font-mono text-[10px] uppercase tracking-mono text-cream/60">Every Day Mood · Basra, IQ</p>
+          </div>
+        </div>
+
+        <div class="md:col-span-2">
+          <p class="font-mono text-[10px] uppercase tracking-mono text-cream/50">Quick Links</p>
+          <ul class="mt-3 space-y-1.5 text-sm text-cream/85">
+            <li><a href="#about" class="hover:text-butter">About</a></li>
+            <li><a href="#menu" class="hover:text-butter">Menu</a></li>
+            <li><a href="#craft" class="hover:text-butter">Craft</a></li>
+            <li><a href="#reviews" class="hover:text-butter">Reviews</a></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-3">
+          <p class="font-mono text-[10px] uppercase tracking-mono text-cream/50">Visit</p>
+          <ul class="mt-3 space-y-1.5 text-sm text-cream/85">
+            <li><a href={mapsUrl} target="_blank" rel="noopener" class="hover:text-butter">Saeed Hamid Street, Basra</a></li>
+            <li><a href={`tel:${phone.replace(/\s/g, '')}`} class="hover:text-butter">{phone}</a></li>
+            <li><a href={`tel:${phone2.replace(/\s/g, '')}`} class="hover:text-butter">{phone2}</a></li>
+            <li><a href="https://instagram.com/nook_iraq" target="_blank" rel="noopener" class="hover:text-butter">@nook_iraq</a></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-3 md:text-right">
+          <p class="font-mono text-[10px] uppercase tracking-mono text-cream/50">Follow</p>
+          <div class="mt-3 flex flex-wrap gap-2 md:justify-end">
+            <a href="https://instagram.com/nook_iraq" target="_blank" rel="noopener" aria-label="Instagram" class="grid h-10 w-10 place-items-center rounded-full border-2 border-cream text-cream hover:bg-butter hover:text-anchor hover:border-butter">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+            </a>
+            <a href="https://nook-iraq.com/menu" target="_blank" rel="noopener" aria-label="Menu" class="grid h-10 w-10 place-items-center rounded-full border-2 border-cream text-cream hover:bg-butter hover:text-anchor hover:border-butter">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 6h16l-1.5 12.2a2 2 0 0 1-2 1.8H7.5a2 2 0 0 1-2-1.8L4 6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 6V4a3 3 0 0 1 6 0v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </a>
+            <a href={`tel:${phone.replace(/\s/g, '')}`} aria-label="Phone" class="grid h-10 w-10 place-items-center rounded-full border-2 border-cream text-cream hover:bg-butter hover:text-anchor hover:border-butter">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 16.92V21a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 5.18 2 2 0 0 1 4.11 3h4a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L9.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 17.92z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+          <p class="mt-3 font-mono text-[10px] uppercase tracking-mono text-cream/50">
+            © {new Date().getFullYear()} NooK Café · كل الحقوق محفوظة
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</section>

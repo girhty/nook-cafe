@@ -1,0 +1,47 @@
+---
+export interface Props {
+  variant?: 'butter-lav' | 'dark-cream' | 'lav-butter';
+  size?: number;
+  rows?: number;
+  cols?: number;
+  className?: string;
+  stagger?: boolean;
+}
+const {
+  variant = 'butter-lav',
+  size = 14,
+  rows = 6,
+  cols = 6,
+  className = '',
+  stagger = true,
+} = Astro.props;
+
+const palette: Record<string, [string, string]> = {
+  'butter-lav': ['#F2C14E', '#B6A6E8'],
+  'dark-cream': ['#2E1A12', '#F7EFDF'],
+  'lav-butter': ['#B6A6E8', '#F2C14E'],
+};
+const [a, b] = palette[variant];
+
+// Staggered pattern with some missing cells
+const cells: Array<{ x: number; y: number; c: string; i: number; missing?: boolean }> = [];
+let i = 0;
+for (let y = 0; y < rows; y++) {
+  for (let x = 0; x < cols; x++) {
+    // Skip some cells for organic shape
+    const dist = Math.hypot(x - cols / 2 + 0.5, y - rows / 2 + 0.5);
+    const max = Math.min(cols, rows) / 2;
+    const skip = dist > max * 0.85 + (Math.sin(x * 1.3 + y) > 0.7 ? -1 : 0);
+    if (skip) continue;
+    cells.push({ x, y, c: (x + y) % 2 === 0 ? a : b, i: i++ });
+  }
+}
+---
+<div class={`relative ${className}`} style={`width:${cols * size}px;height:${rows * size}px;`}>
+  {cells.map((c) => (
+    <span
+      class={`absolute ${stagger ? 'reveal' : ''}`}
+      style={`left:${c.x * size}px;top:${c.y * size}px;width:${size}px;height:${size}px;background:${c.c};transition-delay:${c.i * 28}ms;`}
+    />
+  ))}
+</div>

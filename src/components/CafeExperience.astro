@@ -1,0 +1,100 @@
+---
+const mainImg = 'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9Rc6Y2k9Hmb6GkcWJ_sT_Izeg10OKHgRK5bDA53R65mEOE6SZNM9R_5bYRbqkZk_ats4nAnM2JH0DLtP6gvh1g-DG6eYEGdcfCGETgLVbI1wBBbl0MyDkEqWu7uGOr4vsEEna0=w425-h240-k-no';
+const photos = [
+  'https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/751071334_18122892970707619_8956317259041449491_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=JNP1WtVjVEgQ7kNvwG8ufP0&_nc_oc=Adq13T13Wo0ean8gz2vk4CZLvcJaZiGl85rUCVzacgBqf0koj2hL_9YQE3jgsuxOhdM&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=iAL__7EhTh02EJiDKyhXhA&_nc_ss=7ba8c&oh=00_AQNejvUkQM4v201Egg__xKS9nWPZHbKm-wmWBdIDPJWPhA&oe=6AC11B8E',
+  'https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/726380857_17993892476976709_3392548867320775201_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=108&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=MLWGKDfb7TYQ7kNvwFPb8JN&_nc_oc=Adpf4kq6x6TZChDmCCy5H18Uv-P4cycU8px5wXxRxe9Jy_iswIYLsIVMo92tSzwajzg&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=iAL__7EhTh02EJiDKyhXhA&_nc_ss=7ba8c&oh=00_AQN-6U0NoKfyH0awhGW7G95GzcUvQiKGoPNbqMllYAM9fw&oe=6AC13944',
+  'https://scontent-ams2-1.cdninstagram.com/v/t51.71878-15/697141985_1291398922507065_1920347731348725574_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=OALYLApZppYQ7kNvwEXli9b&_nc_oc=AdqvDs78VY-DgnH0vrR-R6mpxgYqjX9TD8KnBfhBCd1EIcxPNEn9QxKb7U1AV1u6JsQ&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=iAL__7EhTh02EJiDKyhXhA&_nc_ss=7ba8c&oh=00_AQPRAonFBXtYvGMwvIIxYYcUURnPNUzsiAtd1f9WE5AcKA&oe=6AC11816',
+  'https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/671234508_18045341414597058_7057541260264360990_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=ED52dA3hlsAQ7kNvwFn_XuV&_nc_oc=Adr3vh_kORnVLnOpcxJbsE3dQQ0azeX0ONsu30U_jHadkJpEwSv6T8LRtVGd868flIs&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=iAL__7EhTh02EJiDKyhXhA&_nc_ss=7ba8c&oh=00_AQMVW4IjdI3j9bvpAsKwMliiibIkpV_nFv4atrYHYvrHKg&oe=6AC13A00',
+  mainImg,
+];
+const chips = ['Cozy Corners', 'Slow Brewed', 'Warm Light'];
+---
+<section id="experience" class="relative bg-cream py-28 md:py-40">
+  <div class="container-x">
+    <div class="grid gap-12 md:grid-cols-12 md:gap-10">
+      <!-- Left: copy -->
+      <div class="md:col-span-5">
+        <p class="eyebrow reveal">Café Experience · الأجواء</p>
+        <h2 class="display reveal mt-4 text-5xl text-anchor sm:text-6xl md:text-7xl md:leading-[0.85]" style="transition-delay:120ms">
+          <span class="block">Come for the Cup.</span>
+          <span class="block">Stay for the</span>
+          <span class="block text-stroke-anchor">Moment.</span>
+        </h2>
+        <p class="reveal mt-6 max-w-md text-base leading-relaxed text-anchor/75" style="transition-delay:240ms">
+          Wooden counters, soft music, and a corner table with your name on it. NooK was built
+          for the hours between work and home.
+        </p>
+        <div class="reveal mt-7 flex flex-wrap items-center gap-3" style="transition-delay:340ms">
+          {chips.map((c) => (
+            <span class="pill border-2 border-anchor text-anchor">{c}</span>
+          ))}
+        </div>
+        <div class="reveal mt-8" style="transition-delay:440ms">
+          <a href="https://instagram.com/nook_iraq" target="_blank" rel="noopener" class="pill-primary">
+            Follow the vibe
+            <span class="arrow-chip"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 19L19 5M19 5H8M19 5v11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: gallery -->
+      <div class="relative md:col-span-7">
+        <div class="relative">
+          <img
+            id="exp-main"
+            src={mainImg}
+            alt="NooK Café interior"
+            loading="lazy"
+            class="reveal aspect-[4/5] w-full rounded-[32px] border-[6px] border-cream object-cover shadow-chunk md:aspect-[5/6]"
+          />
+          <!-- Position indicator -->
+          <div class="absolute right-4 top-4 flex flex-col gap-1 rounded-full bg-cream/90 px-2 py-2 backdrop-blur">
+            {photos.map((_, i) => (
+              <span class={`block h-2 w-2 rounded-full ${i === 4 ? 'bg-anchor' : 'bg-anchor/25'}`}></span>
+            ))}
+          </div>
+        </div>
+
+        <!-- Thumbnail strip -->
+        <div class="relative -mt-12 ml-2 mr-auto flex max-w-[90%] gap-3 overflow-x-auto pb-2 pl-2 md:-mt-14 md:ml-4 md:max-w-[80%]" id="exp-thumbs">
+          {photos.map((src, i) => (
+            <button
+              type="button"
+              data-thumb={i}
+              class={`exp-thumb relative aspect-square w-20 flex-shrink-0 overflow-hidden rounded-[14px] border-[5px] object-cover transition md:w-24 ${
+                i === 4 ? 'border-butter shadow-chunk -translate-y-1' : 'border-cream shadow-soft hover:-translate-y-1'
+              }`}
+            >
+              <img src={src} alt={`NooK photo ${i + 1}`} loading="lazy" class="h-full w-full object-cover" />
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const main = document.getElementById('exp-main') as HTMLImageElement | null;
+  const thumbs = document.querySelectorAll<HTMLButtonElement>('.exp-thumb');
+  thumbs.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const img = btn.querySelector('img');
+      if (!img || !main) return;
+      main.style.opacity = '0';
+      main.style.transform = 'scale(0.98)';
+      setTimeout(() => {
+        main.src = img.src;
+        main.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        main.style.opacity = '1';
+        main.style.transform = 'scale(1)';
+      }, 200);
+      thumbs.forEach((b) => {
+        b.classList.remove('border-butter', 'shadow-chunk', '-translate-y-1');
+        b.classList.add('border-cream', 'shadow-soft');
+      });
+      btn.classList.remove('border-cream', 'shadow-soft');
+      btn.classList.add('border-butter', 'shadow-chunk', '-translate-y-1');
+    });
+  });
+</script>

@@ -1,299 +1,149 @@
 ---
-import { SITE } from '../data/site.js';
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
 
 const {
-  title = `${SITE.name} — ${SITE.tagline} | Specialty Coffee & Kitchen in Basra`,
-  description = `NooK Café in Basra — specialty coffee, hot chocolate, signature iced drinks and wood-fired pizza. ${SITE.taglineAr} — ${SITE.tagline}. Rated ${SITE.rating} on Google.`
+  title = 'NooK Café — Every Day Mood · Specialty Coffee & Bites in Basra',
+  description = 'NooK Café is Basra\'s beloved neighborhood spot for specialty coffee, signature drinks, Italian pizza and warm gatherings. Everyday mood, since 2017.',
+  image = 'https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/605284339_1905742720329149_581982739458372117_n.jpg',
 } = Astro.props;
 
-const jsonLd = {
+const logo = 'https://scontent-ams2-1.cdninstagram.com/v/t51.82787-19/752682442_18123178903707619_8012619269466550386_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=110&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy45NTEuQzMifQ%3D%3D&_nc_ohc=yNp92vqcr54Q7kNvwHqnp4c&_nc_oc=AdoJkLHWrVg2gHJqggvC-_UxKsVZbUgBt0vgOFCORWfQoCTmQGury6TQwVs79x8wTQQ&_nc_zt=24&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=z49Rb442usHEBRVcn9quHg&_nc_ss=7ba8c&oh=00_AQNzEyerPYRL3RJuKQp_zofKmpmm3IV8tAbZgyIhujoS6Q&oe=6AC10A94';
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+
+const ld = {
   '@context': 'https://schema.org',
   '@type': 'CafeOrCoffeeShop',
-  name: SITE.name,
-  alternateName: SITE.nameAlt,
-  image: SITE.posts[0].image,
-  logo: SITE.profilePic,
-  description,
-  servesCuisine: ['Coffee', 'Desserts', 'Pizza', 'Brunch'],
-  telephone: SITE.phone,
+  name: 'NooK Café',
+  alternateName: 'نووك كافيه',
+  url: canonical,
+  image,
+  telephone: '+964 772 510 0008',
+  priceRange: '$$',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'شارع سيد حامد، الفرع المجاور لمطعم الحسون',
+    streetAddress: 'شارع سيد حاميد، الفرع المجاور لمطعم الحسون',
     addressLocality: 'Basrah',
     addressRegion: 'Basra Governorate',
     postalCode: '61001',
-    addressCountry: 'IQ'
+    addressCountry: 'IQ',
   },
   aggregateRating: {
     '@type': 'AggregateRating',
-    ratingValue: SITE.rating,
-    reviewCount: SITE.reviewCount,
-    bestRating: 5
+    ratingValue: '4.2',
+    reviewCount: '4',
   },
-  sameAs: [SITE.instagram],
-  url: Astro.site ? Astro.site.href : 'https://nook-cafe.example'
+  servesCuisine: ['Coffee', 'Italian', 'Pizza', 'Pastries', 'Brunch'],
+  sameAs: [
+    'https://instagram.com/nook_iraq',
+    'https://nook-iraq.com/menu',
+  ],
 };
 ---
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <meta name="theme-color" content="#2A1A12" />
-    <link rel="canonical" href="https://nook-cafe.example/" />
-
-    <!-- Instagram profile picture doubles as the logo + favicon -->
-    <link rel="icon" href={SITE.profilePic} />
-    <link rel="apple-touch-icon" href={SITE.profilePic} />
-    <link rel="mask-icon" href="/favicon.svg" color="#2A1A12" />
-
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={SITE.name} />
-    <meta property="og:title" content={`${SITE.name} — ${SITE.tagline}`} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={SITE.posts[0].image} />
-    <meta property="og:locale" content="en_IQ" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={`${SITE.name} — ${SITE.tagline}`} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={SITE.posts[0].image} />
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#FCE9A8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
     />
-
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="NooK Café" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <meta name="instagram:username" content="nook_iraq" />
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} />
   </head>
-
-  <body class="bg-cream font-body text-anchor antialiased">
-    <a
-      href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-anchor focus:px-5 focus:py-3 focus:text-sm focus:font-bold focus:uppercase focus:text-cream"
-      >Skip to content</a
-    >
+  <body class="overflow-x-hidden">
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-full focus:bg-anchor focus:px-4 focus:py-2 focus:text-cream">Skip to content</a>
     <slot />
-
     <script>
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      // Scroll reveal
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add('in');
+              io.unobserve(e.target);
+            }
+          }
+        },
+        { rootMargin: '0px 0px -10% 0px', threshold: 0.12 }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
-      /* ---------- Scroll reveal ---------- */
-      const reveals = document.querySelectorAll('[data-reveal]');
-      if (reduce) {
-        reveals.forEach((el) => el.classList.add('is-visible'));
-      } else {
-        const io = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                io.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
-        );
-        reveals.forEach((el) => io.observe(el));
-      }
+      // Count-up stats
+      const countObs = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (!e.isIntersecting) continue;
+            const el = e.target as HTMLElement;
+            const target = parseFloat(el.dataset.count || '0');
+            const suffix = el.dataset.suffix || '';
+            const dur = 1400;
+            const start = performance.now();
+            const step = (now: number) => {
+              const p = Math.min(1, (now - start) / dur);
+              const eased = 1 - Math.pow(1 - p, 3);
+              el.textContent = (target * eased).toFixed(target % 1 ? 1 : 0) + suffix;
+              if (p < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+            countObs.unobserve(el);
+          }
+        },
+        { threshold: 0.4 }
+      );
+      document.querySelectorAll('[data-count]').forEach((el) => countObs.observe(el));
 
-      /* ---------- Stat counters ---------- */
-      const counters = document.querySelectorAll('[data-count]');
-      const runCounter = (el) => {
-        const target = parseFloat(el.dataset.count);
-        const decimals = parseInt(el.dataset.decimals || '0', 10);
-        const suffix = el.dataset.suffix || '';
-        if (reduce) {
-          el.textContent = target.toFixed(decimals) + suffix;
-          return;
-        }
-        const duration = 1200;
-        const start = performance.now();
-        const tick = (now) => {
-          const p = Math.min((now - start) / duration, 1);
-          const eased = 1 - Math.pow(1 - p, 3);
-          el.textContent = (target * eased).toFixed(decimals) + suffix;
-          if (p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
+      // Navbar scroll state
+      const nav = document.querySelector('[data-nav]');
+      const onScroll = () => {
+        if (!nav) return;
+        if (window.scrollY > 24) nav.classList.add('is-scrolled');
+        else nav.classList.remove('is-scrolled');
       };
-      if (counters.length) {
-        const cio = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((e) => {
-              if (e.isIntersecting) {
-                runCounter(e.target);
-                cio.unobserve(e.target);
-              }
-            });
-          },
-          { threshold: 0.5 }
-        );
-        counters.forEach((el) => cio.observe(el));
-      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // Mobile menu
+      const burger = document.querySelector('[data-burger]');
+      const mobileMenu = document.querySelector('[data-mobile-menu]');
+      burger?.addEventListener('click', () => {
+        mobileMenu?.classList.toggle('open');
+      });
     </script>
-
-    <style is:global>
-      :root {
-        --anchor: #2a1a12;
-        --cream: #fff7ea;
-        --butter: #ffe9a8;
-        --golden: #f5b301;
-        --pink: #ff9cc2;
-        --lavender: #b7a9f2;
+    <style>
+      [data-nav].is-scrolled {
+        box-shadow: 0 12px 30px -18px rgba(46, 26, 18, 0.45);
+        transform: translateY(-2px) scale(0.99);
       }
-
-      html,
-      body {
-        overflow-x: hidden;
+      [data-mobile-menu] {
+        clip-path: circle(0% at calc(100% - 36px) 36px);
+        transition: clip-path 0.55s cubic-bezier(0.86, 0, 0.07, 1);
       }
-
-      body {
-        background-color: var(--cream);
-      }
-
-      section[id] {
-        scroll-margin-top: 120px;
-      }
-
-      /* ---------- Focus ---------- */
-      :focus-visible {
-        outline: 3px solid var(--golden);
-        outline-offset: 3px;
-        border-radius: 8px;
-      }
-
-      /* ---------- Display type ---------- */
-      .display {
-        font-family: 'Anton', Impact, sans-serif;
-        text-transform: uppercase;
-        letter-spacing: -0.02em;
-        line-height: 0.92;
-      }
-      .h-hero {
-        font-size: clamp(3.25rem, 11vw, 8.5rem);
-      }
-      .h-section {
-        font-size: clamp(2.5rem, 6.2vw, 5.5rem);
-      }
-      .h-sub {
-        font-size: clamp(1.75rem, 3.4vw, 3rem);
-      }
-      .eyebrow {
-        font-family: 'Space Mono', monospace;
-        text-transform: uppercase;
-        letter-spacing: 0.28em;
-        font-size: 0.7rem;
-        font-weight: 700;
-      }
-
-      /* ---------- Reveal ---------- */
-      [data-reveal] {
-        opacity: 0;
-        transform: translateY(30px);
-        transition:
-          opacity 0.65s cubic-bezier(0.2, 0.8, 0.3, 1),
-          transform 0.65s cubic-bezier(0.2, 0.8, 0.3, 1);
-        transition-delay: var(--d, 0ms);
-        will-change: opacity, transform;
-      }
-      [data-reveal].is-visible {
-        opacity: 1;
-        transform: none;
-      }
-
-      .line-mask {
-        display: block;
-        overflow: hidden;
-      }
-      .line-mask > span {
-        display: block;
-        transform: translateY(112%);
-        transition: transform 0.85s cubic-bezier(0.16, 0.84, 0.28, 1);
-        transition-delay: var(--d, 0ms);
-      }
-      .is-visible .line-mask > span {
-        transform: translateY(0);
-      }
-
-      /* ---------- Marquees ---------- */
-      @keyframes marquee {
-        from {
-          transform: translateX(0);
-        }
-        to {
-          transform: translateX(-50%);
-        }
-      }
-      .marquee {
-        animation: marquee 34s linear infinite;
-      }
-      .marquee--rev {
-        animation-direction: reverse;
-      }
-      .ribbon:hover .marquee {
-        animation-duration: 90s;
-      }
-
-      /* ---------- Floating props ---------- */
-      @keyframes floaty {
-        0%,
-        100% {
-          transform: translate3d(0, 0, 0) rotate(var(--r, 0deg));
-        }
-        50% {
-          transform: translate3d(0, -16px, 0) rotate(var(--r, 0deg));
-        }
-      }
-      .prop {
-        animation: floaty 6s ease-in-out infinite;
-        animation-delay: var(--fd, 0s);
-      }
-
-      /* ---------- Checkerboard ---------- */
-      .checker {
-        background-color: var(--c2, var(--cream));
-        background-image:
-          linear-gradient(45deg, var(--c1, var(--anchor)) 25%, transparent 25% 75%, var(--c1, var(--anchor)) 75%),
-          linear-gradient(45deg, var(--c1, var(--anchor)) 25%, transparent 25% 75%, var(--c1, var(--anchor)) 75%);
-        background-size: var(--s, 32px) var(--s, 32px);
-        background-position: 0 0, calc(var(--s, 32px) / 2) calc(var(--s, 32px) / 2);
-      }
-
-      /* ---------- Paper grain ---------- */
-      .grain::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        opacity: 0.045;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
-      }
-
-      /* ---------- Blob ---------- */
-      .blob {
-        border-radius: 58% 42% 47% 53% / 46% 52% 48% 54%;
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        [data-reveal] {
-          opacity: 1 !important;
-          transform: none !important;
-        }
-        .line-mask > span {
-          transform: none !important;
-        }
-        .marquee,
-        .prop {
-          animation: none !important;
-        }
-        .checker {
-          background-image: none;
-        }
+      [data-mobile-menu].open {
+        clip-path: circle(150% at calc(100% - 36px) 36px);
       }
     </style>
   </body>

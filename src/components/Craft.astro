@@ -1,174 +1,142 @@
 ---
-import { SITE } from '../data/site.js';
-import Checker from './Checker.astro';
-
 const steps = [
   {
-    num: '01',
+    n: '01',
     label: 'Select',
-    title: 'Beans worth choosing',
-    body: 'We taste before we buy. Every roast on the shelf is one we would happily drink twice.',
-    image: SITE.posts[1].image,
-    alt: 'Signature drinks prepared at the NooK Café bar'
+    title: 'Beans Worth Choosing',
+    body: 'We work with single-origins and a small house blend — roasted in small batches, dated, and tasted before they ever reach the bar.',
+    img: 'https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/605284339_1905742720329149_581982739458372117_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=2fz6fKA10W4Q7kNvwG5Lztp&_nc_oc=Adq7M0ZbnqnNhXh0EGq3h7FUh8PfIL2vA0pe8S-MEIPvhI1NFG1IBX0xCrv3apsdk0Q&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=iAL__7EhTh02EJiDKyhXhA&_nc_ss=7ba8c&oh=00_AQMtJrnEXJMXPvTdJYX2XAmNcX4Mxo2lIJ9zLmfiQIrQvA&oe=6AC12630',
   },
   {
-    num: '02',
+    n: '02',
     label: 'Grind',
-    title: 'Ground for the cup',
-    body: 'Espresso fine, cold brew coarse — ground fresh for whatever lands in front of you.',
-    image: SITE.posts[5].image,
-    alt: 'A Spanish latte being finished at NooK Café'
+    title: 'Ground for the Cup',
+    body: 'Every brew method gets its own grind — calibrated on the bar, adjusted for humidity, dialed in shot by shot.',
+    img: 'https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/749440596_18122789392707619_327884191046454746_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=v-HZ9u9HcMoQ7kNvwHaYvZ0&_nc_oc=AdpX6ODiO4ENF1jbplfANsGyenRTEEfc7X9rYf_ghMXVBJ_kKHOUsU576d4dYLjnsxY&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=iAL__7EhTh02EJiDKyhXhA&_nc_ss=7ba8c&oh=00_AQM6VoilIvPdMMrnRWXHtMY5gDlfauH5ujx9zCAmyoEovw&oe=6AC1182A',
   },
   {
-    num: '03',
+    n: '03',
     label: 'Brew',
-    title: 'Steamed with patience',
-    body: 'Milk to the second, cocoa stirred slow. Nothing rushed, nothing burnt.',
-    image: SITE.posts[0].image,
-    alt: 'Hot chocolate with thick cocoa at NooK Café'
+    title: 'Carefully Brewed',
+    body: 'Pour-overs by hand, espresso on a calibrated lever, milk textured slow. We time everything; nothing is rushed.',
+    img: 'https://scontent-ams2-1.cdninstagram.com/v/t51.71878-15/671194837_1679303053199025_3183664580661757338_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=66VfsPyXugsQ7kNvwFDCvFh&_nc_oc=Adqw1jUC_xD3ZVhIm-KZGBdZ9hgUr9g0SlYU09nq6D4yuirFp92NRdl9YcDp09kmbog&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=iAL__7EhTh02EJiDKyhXhA&_nc_ss=7ba8c&oh=00_AQNJI8DQ7T34tKLeh5K6hUedOLfjOpfPATa6CZDYqyeFwg&oe=6AC112D5',
   },
   {
-    num: '04',
+    n: '04',
     label: 'Serve',
-    title: 'Made for your table',
-    body: 'Carried out warm, with a smile and a chair that feels like yours.',
-    image: SITE.posts[7].image,
-    alt: 'A guest’s table at NooK Café'
-  }
+    title: 'Made with Care',
+    body: 'Every cup is finished by the person who made it. If something is off, we start again. That is the only standard.',
+    img: 'https://scontent-ams2-1.cdninstagram.com/v/t51.71878-15/714486343_3073292689727646_1763272717937354963_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=105&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=Tmmtxq_iYYIQ7kNvwH_vMvx&_nc_oc=AdpNVJ8LX0YjJKNLnOO8HTe64PuNiWCkPhtxCt_p4DzgphJw6HRqnLVapBGqdm6y2PU&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=iAL__7EhTh02EJiDKyhXhA&_nc_ss=7ba8c&oh=00_AQN8TaxFVddVpqeFLV0tEHpnlSxT1cuTva5h8Yc_WDK9IA&oe=6AC12D6E',
+  },
 ];
 ---
-
-<section id="craft" class="relative bg-cream-2 py-24 md:py-36">
-  <div class="mx-auto max-w-content px-5">
-    <div class="grid gap-8 lg:grid-cols-12 lg:items-end">
-      <div class="lg:col-span-6">
-        <p class="eyebrow text-anchor/60" data-reveal>The craft</p>
-        <h2 class="display h-section mt-6" data-reveal style="--d:60ms">
-          Simple ingredients.<br />
-          <span class="text-golden">Careful hands.</span>
+<section id="craft" class="relative bg-cream-200 py-28 md:py-40" style="background-color:#F1E5C8;">
+  <div class="container-x">
+    <div class="grid items-end gap-6 md:grid-cols-12">
+      <div class="md:col-span-7">
+        <p class="eyebrow reveal">The Craft · الصناعة</p>
+        <h2 class="display reveal mt-4 text-5xl text-anchor sm:text-6xl md:text-7xl md:leading-[0.85]" style="transition-delay:120ms">
+          <span class="block">Simple Ingredients.</span>
+          <span class="block text-stroke-anchor">Careful Hands.</span>
         </h2>
       </div>
-      <div class="lg:col-span-4 lg:col-start-9">
-        <p class="text-sm leading-relaxed text-anchor/75" data-reveal style="--d:140ms">
-          Four steps, no shortcuts. It's the reason a NooK cup tastes the same
-          on a quiet Monday as it does on a packed Friday night.
+      <div class="md:col-span-5">
+        <p class="reveal max-w-md text-base leading-relaxed text-anchor/75" style="transition-delay:240ms">
+          Four steps, repeated all day. The good ones are rarely the loud ones.
         </p>
-        <Checker
-          class="mt-6"
-          pattern={['1110', '1011', '0111']}
-          colorA="#FFE9A8"
-          colorB="#F5B301"
-          size={14}
-        />
+        <div class="mt-4 hidden md:block">
+          <span class="block h-10 w-10 bg-butter"></span>
+          <span class="mt-1 block h-10 w-10 bg-pop-lavender"></span>
+        </div>
       </div>
     </div>
 
-    <!-- Dark feature card -->
-    <div
-      class="mt-14 rounded-4xl border-2 border-anchor bg-anchor p-6 text-cream shadow-hard sm:p-10 md:p-12"
-      data-craft
-      data-reveal
-      style="--d:180ms"
-    >
-      {
-        steps.map((step, i) => (
-          <div class={i === 0 ? 'block' : 'hidden'} data-panel={i}>
-            <div class="grid gap-8 lg:grid-cols-12 lg:items-center">
-              <div class="lg:col-span-6">
-                <span class="flex h-11 w-11 items-center justify-center rounded-xl border-2 border-cream/30 bg-lavender font-display text-lg text-anchor">
-                  {step.num}
-                </span>
-                <p class="eyebrow mt-5 text-butter">{step.label}</p>
-                <h3 class="display mt-3 text-3xl leading-none text-cream md:text-5xl">
-                  {step.title}
-                </h3>
-                <p class="mt-4 max-w-sm text-sm leading-relaxed text-cream/75">{step.body}</p>
-              </div>
-
-              <div class="lg:col-span-5 lg:col-start-8">
-                <div class="relative">
-                  <span class="absolute left-4 top-4 h-full w-full rounded-3xl bg-pink" aria-hidden="true"></span>
-                  <img
-                    src={step.image}
-                    alt={step.alt}
-                    width="640"
-                    height="480"
-                    loading={i === 0 ? 'eager' : 'lazy'}
-                    class="relative z-10 aspect-[4/3] w-full rounded-3xl border-2 border-cream/25 object-cover"
-                  />
-                </div>
-              </div>
-            </div>
+    <!-- Dark card -->
+    <div class="reveal mt-12 rounded-[36px] bg-anchor p-6 text-cream md:mt-16 md:p-10" style="transition-delay:300ms">
+      <div class="grid items-center gap-8 md:grid-cols-12">
+        <div class="md:col-span-7">
+          <div class="flex items-center gap-3">
+            <span class="grid h-12 w-12 place-items-center rounded-xl bg-pop-lavender font-display text-xl text-anchor">
+              <span id="craft-num">{steps[0].n}</span>
+            </span>
+            <span id="craft-label" class="font-mono text-[11px] uppercase tracking-mono text-cream/70">{steps[0].label}</span>
           </div>
-        ))
-      }
+          <h3 id="craft-title" class="display mt-5 text-4xl text-butter sm:text-5xl md:text-6xl md:leading-[0.9]">{steps[0].title}</h3>
+          <p id="craft-body" class="mt-5 max-w-lg text-base leading-relaxed text-cream/80">{steps[0].body}</p>
+        </div>
+        <div class="md:col-span-5">
+          <div class="relative">
+            <span class="absolute right-3 top-3 -z-10 h-full w-full rounded-[24px] bg-pop-pink"></span>
+            <img
+              id="craft-img"
+              src={steps[0].img}
+              alt="Coffee craft step"
+              loading="lazy"
+              class="relative aspect-square w-full rounded-[24px] border-[5px] border-cream object-cover"
+            />
+          </div>
+        </div>
+      </div>
 
       <!-- Tabs -->
-      <ul class="mt-10 grid gap-px border-t border-cream/25 pt-6 sm:grid-cols-2 lg:grid-cols-4" role="tablist" aria-label="Our process">
-        {
-          steps.map((step, i) => (
-            <li class="border-cream/15 sm:border-r last:sm:border-r-0">
-              <button
-                type="button"
-                role="tab"
-                id={`craft-tab-${i}`}
-                aria-controls={`craft-panel-${i}`}
-                aria-selected={i === 0 ? 'true' : 'false'}
-                class="craft-tab w-full px-1 py-4 text-left transition-colors duration-300"
-                data-tab={i}
-              >
-                <span class="block font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-butter">
-                  {step.label} <span class="text-cream/40">{step.num}</span>
-                </span>
-                <span class="display mt-2 block text-lg text-cream/70 md:text-2xl">{step.title}</span>
-              </button>
-            </li>
-          ))
-        }
-      </ul>
+      <div class="mt-8 grid grid-cols-2 gap-0 border-t border-cream/15 md:grid-cols-4">
+        {steps.map((s, i) => (
+          <button
+            type="button"
+            data-step={i}
+            data-step-data={JSON.stringify(s)}
+            class={`craft-tab group border-cream/15 px-4 py-5 text-left transition md:border-r md:last:border-r-0 ${i === 0 ? 'is-active' : ''}`}
+          >
+            <div class="flex items-baseline gap-3">
+              <span class="font-mono text-[10px] uppercase tracking-mono text-cream/60">{s.n}</span>
+              <span class="font-mono text-[10px] uppercase tracking-mono text-cream/80 group-hover:text-butter">{s.label}</span>
+            </div>
+            <p class="display mt-2 text-xl text-cream sm:text-2xl md:text-3xl md:leading-[0.95]">{s.title}</p>
+          </button>
+        ))}
+      </div>
     </div>
   </div>
 </section>
 
-<style>
-  [data-tab][aria-selected='true'] .display {
-    color: #ffe9a8;
-  }
-  [data-tab][aria-selected='true'] {
-    border-bottom: 3px solid #ff9cc2;
-  }
-  [data-panel] {
-    animation: craftIn 0.5s cubic-bezier(0.2, 0.8, 0.3, 1);
-  }
-  @keyframes craftIn {
-    from {
-      opacity: 0;
-      transform: translateY(14px);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    [data-panel] {
-      animation: none;
-    }
-  }
-</style>
-
 <script>
-  const tabs = document.querySelectorAll<HTMLButtonElement>('[data-tab]');
-  const panels = document.querySelectorAll<HTMLElement>('[data-panel]');
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.craft-tab');
+  const num = document.getElementById('craft-num');
+  const label = document.getElementById('craft-label');
+  const title = document.getElementById('craft-title');
+  const body = document.getElementById('craft-body');
+  const img = document.getElementById('craft-img') as HTMLImageElement | null;
 
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
-      const index = Number(tab.dataset.tab);
-      tabs.forEach((t) => t.setAttribute('aria-selected', 'false'));
-      tab.setAttribute('aria-selected', 'true');
-      panels.forEach((panel, i) => {
-        panel.classList.toggle('hidden', i !== index);
-      });
+      const data = tab.dataset.stepData;
+      if (!data || !num || !label || !title || !body || !img) return;
+      const s = JSON.parse(data);
+      // animate out
+      [num, label, title, body].forEach((el) => (el.style.opacity = '0'));
+      img.style.opacity = '0';
+      img.style.transform = 'scale(0.97)';
+      setTimeout(() => {
+        num.textContent = s.n;
+        label.textContent = s.label;
+        title.textContent = s.title;
+        body.textContent = s.body;
+        img.src = s.img;
+        [num, label, title, body].forEach((el) => (el.style.transition = 'opacity 0.35s ease'));
+        img.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+        [num, label, title, body].forEach((el) => (el.style.opacity = '1'));
+        img.style.opacity = '1';
+        img.style.transform = 'scale(1)';
+      }, 220);
+
+      tabs.forEach((t) => t.classList.remove('is-active'));
+      tab.classList.add('is-active');
     });
   });
 </script>
+
+<style>
+  .craft-tab.is-active p {
+    color: #F2C14E;
+  }
+</style>
